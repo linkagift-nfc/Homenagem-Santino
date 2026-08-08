@@ -1,0 +1,937 @@
+/* ===================================================
+   HOMENAGEM SANTINO
+   STYLE.CSS
+=================================================== */
+
+
+/* ===================================================
+   RESET
+=================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        Georgia,
+        "Times New Roman",
+        serif;
+
+    color: #f8ead2;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(176, 119, 54, 0.20),
+            transparent 38%
+        ),
+        linear-gradient(
+            180deg,
+            #281a11 0%,
+            #17100b 45%,
+            #0f0a07 100%
+        );
+
+    overflow-x: hidden;
+
+}
+
+
+
+/* ===================================================
+   ÁREA PRINCIPAL
+=================================================== */
+
+.homenagem {
+
+    position: relative;
+
+    width: 100%;
+
+    max-width: 520px;
+
+    min-height: 100vh;
+
+    margin: 0 auto;
+
+    padding:
+        28px
+        22px
+        50px;
+
+    text-align: center;
+
+    overflow: hidden;
+
+}
+
+
+
+/* ===================================================
+   EFEITO DE LUZ DE FUNDO
+=================================================== */
+
+.homenagem::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 120px;
+    left: 50%;
+
+    width: 330px;
+    height: 330px;
+
+    transform: translateX(-50%);
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 190, 92, 0.15),
+            rgba(255, 190, 92, 0.04) 45%,
+            transparent 72%
+        );
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    filter: blur(10px);
+
+}
+
+
+
+/* ===================================================
+   DECORAÇÕES
+=================================================== */
+
+.decoracao {
+
+    position: relative;
+
+    z-index: 2;
+
+    color: #c99853;
+
+    opacity: 0.9;
+
+}
+
+
+.decoracao-topo {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.decoracao-topo .estrela {
+
+    font-size: 18px;
+
+}
+
+
+.decoracao-topo .pequena {
+
+    font-size: 11px;
+
+    opacity: 0.65;
+
+}
+
+
+
+/* ===================================================
+   CABEÇALHO
+=================================================== */
+
+.cabecalho {
+
+    position: relative;
+
+    z-index: 2;
+
+    margin-top: 2px;
+
+    margin-bottom: 28px;
+
+}
+
+
+.cabecalho .feliz {
+
+    margin-bottom: 2px;
+
+    font-size: 18px;
+
+    font-style: italic;
+
+    letter-spacing: 2px;
+
+    color: #d7b176;
+
+}
+
+
+.cabecalho h1 {
+
+    font-size: clamp(
+        34px,
+        10vw,
+        48px
+    );
+
+    line-height: 1;
+
+    letter-spacing: 2px;
+
+    color: #f3d3a0;
+
+    text-shadow:
+        0 2px 10px rgba(0, 0, 0, 0.40);
+
+}
+
+
+.cabecalho h2 {
+
+    margin-top: 9px;
+
+    font-size: 24px;
+
+    font-weight: normal;
+
+    color: #ead0a4;
+
+}
+
+
+.coracao {
+
+    display: inline-block;
+
+    margin-left: 4px;
+
+    color: #d59a62;
+
+    animation:
+        pulsarCoracao 2.2s ease-in-out infinite;
+
+}
+
+
+
+/* ===================================================
+   ÁREA DA FOTO
+=================================================== */
+
+.area-foto {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    margin-bottom: 28px;
+
+}
+
+
+
+/* ===================================================
+   MOLDURA EXTERNA
+=================================================== */
+
+.moldura-externa {
+
+    position: relative;
+
+    width: min(
+        78vw,
+        340px
+    );
+
+    aspect-ratio: 4 / 5;
+
+    padding: 10px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #7f521f,
+            #e1b66a 30%,
+            #9d6728 55%,
+            #e1bd75 76%,
+            #704419
+        );
+
+    box-shadow:
+        0 18px 38px rgba(0, 0, 0, 0.48),
+        0 0 25px rgba(205, 145, 61, 0.12);
+
+}
+
+
+
+/* DETALHE INTERNO DA MOLDURA */
+
+.moldura-externa::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 4px;
+
+    border:
+
+        1px solid
+        rgba(255, 236, 187, 0.45);
+
+    border-radius: 21px;
+
+    pointer-events: none;
+
+}
+
+
+
+/* ===================================================
+   MOLDURA INTERNA
+=================================================== */
+
+.moldura-interna {
+
+    width: 100%;
+    height: 100%;
+
+    padding: 6px;
+
+    overflow: hidden;
+
+    border-radius: 17px;
+
+    background: #24150d;
+
+    box-shadow:
+        inset 0 0 12px rgba(0, 0, 0, 0.70);
+
+}
+
+
+
+/* ===================================================
+   FOTO
+=================================================== */
+
+.foto-pai {
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    border-radius: 13px;
+
+    transition:
+        transform 1.8s ease;
+
+}
+
+
+.moldura-externa:hover .foto-pai {
+
+    transform: scale(1.02);
+
+}
+
+
+
+/* ===================================================
+   MENSAGEM INICIAL
+=================================================== */
+
+.mensagem-inicial {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 410px;
+
+    margin: 0 auto 26px;
+
+    color: #ead8bd;
+
+}
+
+
+.mensagem-inicial p {
+
+    margin-bottom: 9px;
+
+    font-size: 17px;
+
+    line-height: 1.55;
+
+}
+
+
+.mensagem-inicial strong {
+
+    color: #f2c983;
+
+}
+
+
+
+/* ===================================================
+   BOTÃO ABRIR HOMENAGEM
+=================================================== */
+
+.area-botao {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 9px;
+
+}
+
+
+.btn-abrir {
+
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: min(
+        100%,
+        330px
+    );
+
+    min-height: 58px;
+
+    padding:
+        15px
+        22px;
+
+    border:
+        1px solid
+        rgba(220, 169, 89, 0.70);
+
+    border-radius: 999px;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    color: #f7dfb6;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(112, 72, 32, 0.65),
+            rgba(62, 37, 19, 0.90)
+        );
+
+    box-shadow:
+        0 9px 20px rgba(0, 0, 0, 0.34),
+        inset 0 1px 0 rgba(255, 255, 255, 0.10);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.btn-abrir:active {
+
+    transform: scale(0.97);
+
+}
+
+
+.btn-abrir:hover {
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(140, 88, 37, 0.80),
+            rgba(72, 43, 22, 0.95)
+        );
+
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.40),
+        0 0 20px rgba(213, 151, 66, 0.12);
+
+}
+
+
+.icone-play {
+
+    font-size: 14px;
+
+    color: #dfb66d;
+
+}
+
+
+.instrucao {
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    font-size: 12px;
+
+    letter-spacing: 0.4px;
+
+    color: rgba(
+        238,
+        213,
+        176,
+        0.62
+    );
+
+}
+
+
+
+/* ===================================================
+   CONTEÚDO DA HOMENAGEM
+=================================================== */
+
+.conteudo-homenagem {
+
+    position: relative;
+
+    z-index: 2;
+
+    max-height: 0;
+
+    margin-top: 0;
+
+    overflow: hidden;
+
+    opacity: 0;
+
+    transform:
+        translateY(20px);
+
+    transition:
+        max-height 1.8s ease,
+        opacity 1s ease,
+        transform 1s ease,
+        margin-top 1s ease;
+
+}
+
+
+
+/* CLASSE ATIVADA PELO JAVASCRIPT */
+
+.conteudo-homenagem.ativo {
+
+    max-height: 1800px;
+
+    margin-top: 40px;
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+
+/* ===================================================
+   SEPARADOR
+=================================================== */
+
+.separador {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 30px;
+
+}
+
+
+.separador span {
+
+    width: 76px;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            #b88545
+        );
+
+}
+
+
+.separador span:last-child {
+
+    background:
+        linear-gradient(
+            90deg,
+            #b88545,
+            transparent
+        );
+
+}
+
+
+.separador strong {
+
+    color: #c99157;
+
+}
+
+
+
+/* ===================================================
+   TEXTO DA HOMENAGEM
+=================================================== */
+
+.texto-homenagem {
+
+    max-width: 420px;
+
+    margin: 0 auto;
+
+    padding:
+        0
+        8px;
+
+    font-size: 17px;
+
+    line-height: 1.75;
+
+    color: #ead8bd;
+
+}
+
+
+.texto-homenagem p {
+
+    margin-bottom: 20px;
+
+}
+
+
+.texto-homenagem p:first-child {
+
+    font-size: 25px;
+
+    font-style: italic;
+
+    color: #efc77f;
+
+}
+
+
+.texto-homenagem .destaque {
+
+    margin-top: 28px;
+
+    margin-bottom: 28px;
+
+    font-size: 20px;
+
+    font-style: italic;
+
+    color: #f2cf91;
+
+}
+
+
+
+/* ===================================================
+   ASSINATURA
+=================================================== */
+
+.assinatura {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    margin-top: 32px;
+
+    margin-bottom: 38px;
+
+    color: #d9bb8c;
+
+}
+
+
+.assinatura span {
+
+    font-size: 15px;
+
+    font-style: italic;
+
+}
+
+
+.assinatura strong {
+
+    font-size: 20px;
+
+    font-weight: normal;
+
+    color: #f0cf97;
+
+}
+
+
+
+/* ===================================================
+   BOTÃO DA MÚSICA
+=================================================== */
+
+.btn-musica {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+
+    margin:
+        0
+        auto;
+
+    border:
+        1px solid
+        rgba(220, 168, 86, 0.65);
+
+    border-radius: 50%;
+
+    font-size: 22px;
+
+    color: #f2d09b;
+
+    background:
+        rgba(69, 42, 22, 0.75);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.35);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+
+}
+
+
+.btn-musica:hover {
+
+    background:
+        rgba(101, 61, 29, 0.88);
+
+}
+
+
+.btn-musica:active {
+
+    transform: scale(0.93);
+
+}
+
+
+
+/* ===================================================
+   RODAPÉ DECORATIVO
+=================================================== */
+
+.decoracao-rodape {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 44px;
+
+    font-size: 12px;
+
+    color: #a9743e;
+
+}
+
+
+
+/* ===================================================
+   ANIMAÇÕES
+=================================================== */
+
+@keyframes pulsarCoracao {
+
+    0%,
+    100% {
+
+        transform: scale(1);
+
+    }
+
+    50% {
+
+        transform: scale(1.14);
+
+    }
+
+}
+
+
+
+/* ===================================================
+   CELULARES PEQUENOS
+=================================================== */
+
+@media (
+    max-width: 380px
+) {
+
+    .homenagem {
+
+        padding-left: 16px;
+        padding-right: 16px;
+
+    }
+
+
+    .cabecalho h1 {
+
+        font-size: 32px;
+
+    }
+
+
+    .cabecalho h2 {
+
+        font-size: 22px;
+
+    }
+
+
+    .mensagem-inicial p,
+    .texto-homenagem {
+
+        font-size: 16px;
+
+    }
+
+
+    .moldura-externa {
+
+        width: 82vw;
+
+    }
+
+}
+
+
+
+/* ===================================================
+   TELAS MAIORES
+=================================================== */
+
+@media (
+    min-width: 700px
+) {
+
+    body {
+
+        display: flex;
+
+        justify-content: center;
+
+    }
+
+
+    .homenagem {
+
+        min-height: 100vh;
+
+        box-shadow:
+            0 0 80px rgba(0, 0, 0, 0.55);
+
+    }
+
+}
