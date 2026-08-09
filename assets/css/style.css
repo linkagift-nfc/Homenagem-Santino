@@ -9,20 +9,32 @@
 =================================================== */
 
 * {
+
     margin: 0;
+
     padding: 0;
+
     box-sizing: border-box;
+
 }
+
 
 
 html {
+
     scroll-behavior: smooth;
+
 }
+
 
 
 body {
 
+    width: 100%;
+
     min-height: 100vh;
+
+    min-height: 100dvh;
 
     font-family:
         Georgia,
@@ -64,14 +76,62 @@ body {
 
     min-height: 100vh;
 
+    min-height: 100dvh;
+
     margin: 0 auto;
 
     padding:
-        28px
+        0
         22px
         50px;
 
     text-align: center;
+
+    overflow: hidden;
+
+}
+
+
+
+/* ===================================================
+   PRIMEIRA TELA
+   CABE NA ALTURA DO CELULAR
+=================================================== */
+
+.tela-inicial {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    height: 100vh;
+
+    min-height: 100dvh;
+
+    height: 100dvh;
+
+    padding:
+        max(
+            14px,
+            env(safe-area-inset-top)
+        )
+        0
+        max(
+            14px,
+            env(safe-area-inset-bottom)
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
 
     overflow: hidden;
 
@@ -90,12 +150,15 @@ body {
     position: absolute;
 
     top: 120px;
+
     left: 50%;
 
     width: 330px;
+
     height: 330px;
 
-    transform: translateX(-50%);
+    transform:
+        translateX(-50%);
 
     background:
         radial-gradient(
@@ -109,7 +172,8 @@ body {
 
     pointer-events: none;
 
-    filter: blur(10px);
+    filter:
+        blur(10px);
 
 }
 
@@ -132,6 +196,7 @@ body {
 }
 
 
+
 .decoracao-topo {
 
     display: flex;
@@ -140,23 +205,40 @@ body {
 
     align-items: center;
 
-    gap: 14px;
+    gap: 12px;
 
-    margin-bottom: 10px;
+    margin-bottom:
+        clamp(
+            3px,
+            0.8vh,
+            8px
+        );
 
 }
+
 
 
 .decoracao-topo .estrela {
 
-    font-size: 18px;
+    font-size:
+        clamp(
+            13px,
+            2.2vh,
+            18px
+        );
 
 }
 
 
+
 .decoracao-topo .pequena {
 
-    font-size: 11px;
+    font-size:
+        clamp(
+            8px,
+            1.4vh,
+            11px
+        );
 
     opacity: 0.65;
 
@@ -174,18 +256,29 @@ body {
 
     z-index: 2;
 
-    margin-top: 2px;
+    margin-top: 0;
 
-    margin-bottom: 28px;
+    margin-bottom:
+        clamp(
+            8px,
+            1.8vh,
+            18px
+        );
 
 }
 
 
+
 .cabecalho .feliz {
 
-    margin-bottom: 2px;
+    margin-bottom: 1px;
 
-    font-size: 18px;
+    font-size:
+        clamp(
+            14px,
+            2.1vh,
+            18px
+        );
 
     font-style: italic;
 
@@ -196,13 +289,15 @@ body {
 }
 
 
+
 .cabecalho h1 {
 
-    font-size: clamp(
-        34px,
-        10vw,
-        48px
-    );
+    font-size:
+        clamp(
+            29px,
+            8.8vw,
+            43px
+        );
 
     line-height: 1;
 
@@ -211,22 +306,40 @@ body {
     color: #f3d3a0;
 
     text-shadow:
-        0 2px 10px rgba(0, 0, 0, 0.40);
+        0 2px 10px
+        rgba(
+            0,
+            0,
+            0,
+            0.40
+        );
 
 }
 
 
+
 .cabecalho h2 {
 
-    margin-top: 9px;
+    margin-top:
+        clamp(
+            4px,
+            0.8vh,
+            8px
+        );
 
-    font-size: 24px;
+    font-size:
+        clamp(
+            19px,
+            3vh,
+            24px
+        );
 
     font-weight: normal;
 
     color: #ead0a4;
 
 }
+
 
 
 .coracao {
@@ -238,7 +351,10 @@ body {
     color: #d59a62;
 
     animation:
-        pulsarCoracao 2.2s ease-in-out infinite;
+        pulsarCoracao
+        2.2s
+        ease-in-out
+        infinite;
 
 }
 
@@ -258,7 +374,14 @@ body {
 
     justify-content: center;
 
-    margin-bottom: 28px;
+    flex-shrink: 1;
+
+    margin-bottom:
+        clamp(
+            9px,
+            1.8vh,
+            18px
+        );
 
 }
 
@@ -272,14 +395,27 @@ body {
 
     position: relative;
 
-    width: min(
-        78vw,
-        340px
-    );
+    width:
+        min(
+            64vw,
+            270px
+        );
 
-    aspect-ratio: 4 / 5;
+    max-height:
+        min(
+            42vh,
+            340px
+        );
 
-    padding: 10px;
+    aspect-ratio:
+        4 / 5;
+
+    padding:
+        clamp(
+            6px,
+            1vh,
+            10px
+        );
 
     border-radius: 24px;
 
@@ -312,9 +448,13 @@ body {
     inset: 4px;
 
     border:
-
         1px solid
-        rgba(255, 236, 187, 0.45);
+        rgba(
+            255,
+            236,
+            187,
+            0.45
+        );
 
     border-radius: 21px;
 
@@ -331,6 +471,7 @@ body {
 .moldura-interna {
 
     width: 100%;
+
     height: 100%;
 
     padding: 6px;
@@ -342,7 +483,14 @@ body {
     background: #24150d;
 
     box-shadow:
-        inset 0 0 12px rgba(0, 0, 0, 0.70);
+        inset
+        0 0 12px
+        rgba(
+            0,
+            0,
+            0,
+            0.70
+        );
 
 }
 
@@ -357,6 +505,7 @@ body {
     display: block;
 
     width: 100%;
+
     height: 100%;
 
     object-fit: cover;
@@ -366,14 +515,19 @@ body {
     border-radius: 13px;
 
     transition:
-        transform 1.8s ease;
+        transform
+        1.8s
+        ease;
 
 }
 
 
-.moldura-externa:hover .foto-pai {
 
-    transform: scale(1.02);
+.moldura-externa:hover
+.foto-pai {
+
+    transform:
+        scale(1.02);
 
 }
 
@@ -391,22 +545,49 @@ body {
 
     max-width: 410px;
 
-    margin: 0 auto 26px;
+    margin:
+        0 auto
+        clamp(
+            9px,
+            1.7vh,
+            18px
+        );
 
     color: #ead8bd;
 
 }
 
 
+
 .mensagem-inicial p {
 
-    margin-bottom: 9px;
+    margin-bottom:
+        clamp(
+            3px,
+            0.7vh,
+            8px
+        );
 
-    font-size: 17px;
+    font-size:
+        clamp(
+            14px,
+            2vh,
+            17px
+        );
 
-    line-height: 1.55;
+    line-height:
+        1.4;
 
 }
+
+
+
+.mensagem-inicial p:last-child {
+
+    margin-bottom: 0;
+
+}
+
 
 
 .mensagem-inicial strong {
@@ -433,9 +614,15 @@ body {
 
     align-items: center;
 
-    gap: 9px;
+    gap:
+        clamp(
+            4px,
+            0.8vh,
+            9px
+        );
 
 }
+
 
 
 .btn-abrir {
@@ -448,20 +635,35 @@ body {
 
     gap: 10px;
 
-    width: min(
-        100%,
-        330px
-    );
+    width:
+        min(
+            100%,
+            330px
+        );
 
-    min-height: 58px;
+    min-height:
+        clamp(
+            48px,
+            6.8vh,
+            58px
+        );
 
     padding:
-        15px
+        clamp(
+            11px,
+            1.7vh,
+            15px
+        )
         22px;
 
     border:
         1px solid
-        rgba(220, 169, 89, 0.70);
+        rgba(
+            220,
+            169,
+            89,
+            0.70
+        );
 
     border-radius: 999px;
 
@@ -469,7 +671,12 @@ body {
         Arial,
         sans-serif;
 
-    font-size: 14px;
+    font-size:
+        clamp(
+            12px,
+            1.8vh,
+            14px
+        );
 
     font-weight: bold;
 
@@ -498,11 +705,14 @@ body {
 }
 
 
+
 .btn-abrir:active {
 
-    transform: scale(0.97);
+    transform:
+        scale(0.97);
 
 }
+
 
 
 .btn-abrir:hover {
@@ -521,6 +731,17 @@ body {
 }
 
 
+
+.btn-abrir:disabled {
+
+    cursor: default;
+
+    opacity: 0.82;
+
+}
+
+
+
 .icone-play {
 
     font-size: 14px;
@@ -530,22 +751,29 @@ body {
 }
 
 
+
 .instrucao {
 
     font-family:
         Arial,
         sans-serif;
 
-    font-size: 12px;
+    font-size:
+        clamp(
+            10px,
+            1.5vh,
+            12px
+        );
 
     letter-spacing: 0.4px;
 
-    color: rgba(
-        238,
-        213,
-        176,
-        0.62
-    );
+    color:
+        rgba(
+            238,
+            213,
+            176,
+            0.62
+        );
 
 }
 
@@ -618,6 +846,7 @@ body {
 }
 
 
+
 .separador span {
 
     width: 76px;
@@ -634,6 +863,7 @@ body {
 }
 
 
+
 .separador span:last-child {
 
     background:
@@ -644,6 +874,7 @@ body {
         );
 
 }
+
 
 
 .separador strong {
@@ -677,11 +908,13 @@ body {
 }
 
 
+
 .texto-homenagem p {
 
     margin-bottom: 20px;
 
 }
+
 
 
 .texto-homenagem p:first-child {
@@ -693,6 +926,7 @@ body {
     color: #efc77f;
 
 }
+
 
 
 .texto-homenagem .destaque {
@@ -732,6 +966,7 @@ body {
 }
 
 
+
 .assinatura span {
 
     font-size: 15px;
@@ -739,6 +974,7 @@ body {
     font-style: italic;
 
 }
+
 
 
 .assinatura strong {
@@ -766,6 +1002,7 @@ body {
     justify-content: center;
 
     width: 52px;
+
     height: 52px;
 
     margin:
@@ -774,7 +1011,12 @@ body {
 
     border:
         1px solid
-        rgba(220, 168, 86, 0.65);
+        rgba(
+            220,
+            168,
+            86,
+            0.65
+        );
 
     border-radius: 50%;
 
@@ -783,10 +1025,21 @@ body {
     color: #f2d09b;
 
     background:
-        rgba(69, 42, 22, 0.75);
+        rgba(
+            69,
+            42,
+            22,
+            0.75
+        );
 
     box-shadow:
-        0 6px 18px rgba(0, 0, 0, 0.35);
+        0 6px 18px
+        rgba(
+            0,
+            0,
+            0,
+            0.35
+        );
 
     cursor: pointer;
 
@@ -797,17 +1050,25 @@ body {
 }
 
 
+
 .btn-musica:hover {
 
     background:
-        rgba(101, 61, 29, 0.88);
+        rgba(
+            101,
+            61,
+            29,
+            0.88
+        );
 
 }
 
 
+
 .btn-musica:active {
 
-    transform: scale(0.93);
+    transform:
+        scale(0.93);
 
 }
 
@@ -843,16 +1104,20 @@ body {
 
 @keyframes pulsarCoracao {
 
+
     0%,
     100% {
 
-        transform: scale(1);
+        transform:
+            scale(1);
 
     }
 
+
     50% {
 
-        transform: scale(1.14);
+        transform:
+            scale(1.14);
 
     }
 
@@ -861,16 +1126,245 @@ body {
 
 
 /* ===================================================
-   CELULARES PEQUENOS
+   CELULARES COM ALTURA MENOR
+   EX.: 600px / 650px
+=================================================== */
+
+@media (
+    max-height: 700px
+) {
+
+
+    .tela-inicial {
+
+        padding-top: 8px;
+
+        padding-bottom: 8px;
+
+    }
+
+
+    .decoracao-topo {
+
+        margin-bottom: 2px;
+
+    }
+
+
+    .cabecalho {
+
+        margin-bottom: 7px;
+
+    }
+
+
+    .cabecalho .feliz {
+
+        font-size: 13px;
+
+    }
+
+
+    .cabecalho h1 {
+
+        font-size:
+            clamp(
+                27px,
+                8vw,
+                36px
+            );
+
+    }
+
+
+    .cabecalho h2 {
+
+        margin-top: 3px;
+
+        font-size: 19px;
+
+    }
+
+
+    .moldura-externa {
+
+        width:
+            min(
+                52vw,
+                215px
+            );
+
+        max-height: 34vh;
+
+        padding: 6px;
+
+    }
+
+
+    .area-foto {
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .mensagem-inicial {
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .mensagem-inicial p {
+
+        margin-bottom: 3px;
+
+        font-size: 13px;
+
+        line-height: 1.3;
+
+    }
+
+
+    .btn-abrir {
+
+        min-height: 45px;
+
+        padding:
+            10px
+            20px;
+
+        font-size: 12px;
+
+    }
+
+
+    .instrucao {
+
+        font-size: 10px;
+
+    }
+
+}
+
+
+
+/* ===================================================
+   CELULARES MUITO BAIXOS
+=================================================== */
+
+@media (
+    max-height: 600px
+) {
+
+
+    .decoracao-topo {
+
+        display: none;
+
+    }
+
+
+    .cabecalho {
+
+        margin-bottom: 5px;
+
+    }
+
+
+    .cabecalho .feliz {
+
+        font-size: 12px;
+
+    }
+
+
+    .cabecalho h1 {
+
+        font-size: 28px;
+
+    }
+
+
+    .cabecalho h2 {
+
+        margin-top: 2px;
+
+        font-size: 17px;
+
+    }
+
+
+    .moldura-externa {
+
+        width:
+            min(
+                45vw,
+                175px
+            );
+
+        max-height: 30vh;
+
+    }
+
+
+    .area-foto {
+
+        margin-bottom: 6px;
+
+    }
+
+
+    .mensagem-inicial {
+
+        margin-bottom: 6px;
+
+    }
+
+
+    .mensagem-inicial p {
+
+        font-size: 12px;
+
+        line-height: 1.25;
+
+    }
+
+
+    .btn-abrir {
+
+        min-height: 42px;
+
+        padding:
+            8px
+            18px;
+
+    }
+
+
+    .instrucao {
+
+        font-size: 9px;
+
+    }
+
+}
+
+
+
+/* ===================================================
+   CELULARES ESTREITOS
 =================================================== */
 
 @media (
     max-width: 380px
 ) {
 
+
     .homenagem {
 
         padding-left: 16px;
+
         padding-right: 16px;
 
     }
@@ -878,29 +1372,26 @@ body {
 
     .cabecalho h1 {
 
-        font-size: 32px;
+        font-size:
+            clamp(
+                27px,
+                9vw,
+                32px
+            );
 
     }
 
 
     .cabecalho h2 {
 
-        font-size: 22px;
+        font-size: 20px;
 
     }
 
 
-    .mensagem-inicial p,
     .texto-homenagem {
 
         font-size: 16px;
-
-    }
-
-
-    .moldura-externa {
-
-        width: 82vw;
 
     }
 
@@ -916,6 +1407,7 @@ body {
     min-width: 700px
 ) {
 
+
     body {
 
         display: flex;
@@ -930,7 +1422,20 @@ body {
         min-height: 100vh;
 
         box-shadow:
-            0 0 80px rgba(0, 0, 0, 0.55);
+            0 0 80px
+            rgba(
+                0,
+                0,
+                0,
+                0.55
+            );
+
+    }
+
+
+    .moldura-externa {
+
+        width: 270px;
 
     }
 
