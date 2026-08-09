@@ -94,17 +94,12 @@ let wakeLock =
     null;
 
 
-
 async function manterTelaAcesa() {
 
 
     if (
         !("wakeLock" in navigator)
     ) {
-
-        console.log(
-            "Wake Lock não disponível."
-        );
 
         return;
 
@@ -139,11 +134,6 @@ async function manterTelaAcesa() {
             );
 
 
-        console.log(
-            "Tela mantida ativa."
-        );
-
-
     }
 
     catch (
@@ -152,7 +142,7 @@ async function manterTelaAcesa() {
 
 
         console.log(
-            "Não foi possível manter a tela ligada.",
+            "Wake Lock não disponível.",
             erro
         );
 
@@ -165,7 +155,7 @@ async function manterTelaAcesa() {
 
 
 /* ===================================================
-   REATIVAR WAKE LOCK
+   REATIVAR TELA ACESA
 =================================================== */
 
 document.addEventListener(
@@ -314,7 +304,7 @@ criarParticulas();
 
 
 /* ===================================================
-   CONFIGURAR ÁUDIO
+   CONFIGURAR ANALISADOR
 =================================================== */
 
 function configurarAudioContext() {
@@ -362,14 +352,12 @@ function configurarAudioContext() {
                 .createAnalyser();
 
 
-        /* MAIS DETALHE NO EQUALIZADOR */
-
         analisador.fftSize =
             512;
 
 
         analisador.smoothingTimeConstant =
-            0.68;
+            0.60;
 
 
         dadosFrequencia =
@@ -457,7 +445,7 @@ async function ativarAudioContext() {
 
 
 /* ===================================================
-   ANIMAR EQUALIZADOR
+   EQUALIZADOR REAL
 =================================================== */
 
 function animarEqualizador() {
@@ -478,14 +466,13 @@ function animarEqualizador() {
     );
 
 
-    const quantidadeBarras =
+    const totalBarras =
         barrasEqualizador.length;
 
 
-
     /*
-       Graves e médios.
-       Essa faixa cria movimentos mais fortes.
+       Utiliza principalmente graves
+       e médios da música.
     */
 
     const inicio =
@@ -494,7 +481,7 @@ function animarEqualizador() {
 
     const fim =
         Math.min(
-            90,
+            110,
             dadosFrequencia.length - 1
         );
 
@@ -512,17 +499,20 @@ function animarEqualizador() {
         ) {
 
 
-            let posicao =
+            const porcentagem =
+                indice /
+                (
+                    totalBarras - 1
+                );
+
+
+            const posicao =
                 Math.floor(
 
                     inicio +
 
-                    (
-                        faixa /
-                        quantidadeBarras
-                    ) *
-
-                    indice
+                    porcentagem *
+                    faixa
 
                 );
 
@@ -535,17 +525,17 @@ function animarEqualizador() {
 
 
             /* =====================================
-               REFORÇAR GRAVES
+               REFORÇO MUSICAL
             ====================================== */
 
             if (
-                indice >= 3 &&
-                indice <= 7
+                indice >= 4 &&
+                indice <= 11
             ) {
 
 
                 valor *=
-                    1.22;
+                    1.15;
 
 
             }
@@ -553,76 +543,51 @@ function animarEqualizador() {
 
 
             /* =====================================
-               CENTRO MAIS FORTE
-            ====================================== */
-
-            if (
-                indice === 5
-            ) {
-
-
-                valor *=
-                    1.18;
-
-
-            }
-
-
-
-            /* =====================================
-               CONVERTER EM ALTURA
+               MOVIMENTO VISUAL
             ====================================== */
 
             let altura =
-                5 +
+                4 +
                 (
                     valor /
                     255
                 ) *
-                58;
+                34;
 
 
 
             /* =====================================
-               LATERAIS UM POUCO MENORES
+               LATERAIS MAIS CURTAS
             ====================================== */
 
-            if (
-                indice === 0 ||
-                indice === 10
-            ) {
+            const distanciaCentro =
+                Math.abs(
+                    indice -
+                    (
+                        totalBarras - 1
+                    ) / 2
+                );
 
 
-                altura *=
-                    0.68;
+            const fator =
+                1 -
+                (
+                    distanciaCentro /
+                    totalBarras
+                ) *
+                0.35;
 
 
-            }
+            altura *=
+                fator;
 
 
-            else if (
-                indice === 1 ||
-                indice === 9
-            ) {
-
-
-                altura *=
-                    0.82;
-
-
-            }
-
-
-
-            /* =====================================
-               LIMITES
-            ====================================== */
 
             altura =
                 Math.max(
-                    5,
+                    4,
                     Math.min(
-                        64,
+                        38,
                         altura
                     )
                 );
@@ -653,6 +618,15 @@ function animarEqualizador() {
 =================================================== */
 
 function iniciarEqualizador() {
+
+
+    if (
+        !equalizador
+    ) {
+
+        return;
+
+    }
 
 
     equalizador
@@ -706,27 +680,43 @@ function pararEqualizador() {
     }
 
 
-    equalizador
-        .classList
-        .remove(
-            "tocando"
-        );
+    if (
+        equalizador
+    ) {
+
+
+        equalizador
+            .classList
+            .remove(
+                "tocando"
+            );
+
+
+    }
 
 
 
     const alturas = [
 
+        4,
         5,
         7,
-        10,
-        13,
-        16,
-        20,
-        16,
-        13,
-        10,
+        9,
+
+        12,
+        9,
+        6,
+        4,
+
+        4,
+        6,
+        9,
+        12,
+
+        9,
         7,
-        5
+        5,
+        4
 
     ];
 
@@ -779,6 +769,7 @@ btnAbrir.addEventListener(
             true;
 
 
+
         await manterTelaAcesa();
 
 
@@ -825,7 +816,7 @@ btnAbrir.addEventListener(
 
 
         /* =========================================
-           ROLAR EXATAMENTE PARA SEGUNDA TELA
+           IR PARA SEGUNDA TELA
         ========================================== */
 
         setTimeout(
@@ -960,7 +951,7 @@ function pausarMusica() {
 
 
 /* ===================================================
-   BOTÃO DA MÚSICA
+   BOTÃO PLAY / PAUSE
 =================================================== */
 
 btnMusica.addEventListener(
@@ -996,7 +987,7 @@ btnMusica.addEventListener(
 
 
 /* ===================================================
-   BOTÃO PLAY / PAUSE
+   ATUALIZAR BOTÃO
 =================================================== */
 
 function atualizarBotaoMusica() {
@@ -1241,7 +1232,7 @@ function fecharCartaFinal() {
 
 
 /* ===================================================
-   BOTÃO FECHAR CARTA
+   BOTÃO FECHAR
 =================================================== */
 
 btnFecharCarta.addEventListener(
