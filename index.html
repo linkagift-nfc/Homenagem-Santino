@@ -22,8 +22,6 @@
         content="#17100b"
     >
 
-    <!-- CSS -->
-
     <link
         rel="stylesheet"
         href="assets/css/style.css"
@@ -40,10 +38,48 @@
 
     <!-- =========================================
          PRIMEIRA TELA
-         CABE EXATAMENTE NA TELA DO CELULAR
     ========================================== -->
 
-    <section class="tela-inicial">
+    <section
+        id="telaInicial"
+        class="tela-inicial"
+    >
+
+
+        <!-- =====================================
+             POEIRA DOURADA
+        ====================================== -->
+
+        <div
+            id="particulas"
+            class="particulas"
+            aria-hidden="true"
+        ></div>
+
+
+
+        <!-- =====================================
+             FRASE DECORATIVA DE FUNDO
+        ====================================== -->
+
+        <div
+            id="fraseFundo"
+            class="frase-fundo"
+            aria-hidden="true"
+        >
+
+            <span>
+                ♥
+            </span>
+
+            Feliz aniversário, Pai
+
+            <span>
+                ♥
+            </span>
+
+        </div>
+
 
 
         <!-- DECORAÇÃO SUPERIOR -->
@@ -237,9 +273,7 @@
             </p>
 
             <p>
-
                 Feliz aniversário!
-
             </p>
 
         </div>
@@ -305,6 +339,7 @@
 
 <!-- =========================================
      ÁUDIO
+     SEM LOOP
 ========================================== -->
 
 <audio
@@ -320,8 +355,6 @@
 </audio>
 
 
-
-<!-- JAVASCRIPT -->
 
 <script
     src="assets/js/script.js"
