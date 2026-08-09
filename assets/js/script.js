@@ -44,9 +44,15 @@ document.getElementById(
 );
 
 
-const fraseFundo =
+const cartaFinal =
 document.getElementById(
-    "fraseFundo"
+    "cartaFinal"
+);
+
+
+const btnFecharCarta =
+document.getElementById(
+    "btnFecharCarta"
 );
 
 
@@ -63,9 +69,13 @@ let musicaTocando =
     false;
 
 
+let cartaJaExibida =
+    false;
+
+
 
 /* ===================================================
-   CRIAR POEIRA DOURADA
+   CRIAR PARTÍCULAS DOURADAS
 =================================================== */
 
 function criarParticulas() {
@@ -81,7 +91,8 @@ function criarParticulas() {
 
 
     const quantidade =
-        24;
+        30;
+
 
 
     for (
@@ -103,48 +114,31 @@ function criarParticulas() {
 
 
 
-        /* POSIÇÃO HORIZONTAL */
-
         const esquerda =
             Math.random() * 100;
 
 
-
-        /* POSIÇÃO VERTICAL */
-
         const topo =
             Math.random() * 100;
 
-
-
-        /* TAMANHO */
 
         const tamanho =
             2 +
             Math.random() * 4;
 
 
-
-        /* TEMPO DE ANIMAÇÃO */
-
         const duracao =
-            5 +
-            Math.random() * 7;
+            7 +
+            Math.random() * 9;
 
-
-
-        /* ATRASO */
 
         const atraso =
-            Math.random() * 6;
+            Math.random() * 10;
 
-
-
-        /* OPACIDADE */
 
         const opacidade =
-            0.18 +
-            Math.random() * 0.50;
+            0.15 +
+            Math.random() * 0.42;
 
 
 
@@ -184,12 +178,13 @@ function criarParticulas() {
 
     }
 
+
 }
 
 
 
 /* ===================================================
-   EXECUTAR PARTÍCULAS
+   INICIAR PARTÍCULAS
 =================================================== */
 
 criarParticulas();
@@ -204,7 +199,7 @@ btnAbrir.addEventListener(
 
     "click",
 
-    async function () {
+    function () {
 
 
         if (
@@ -222,36 +217,14 @@ btnAbrir.addEventListener(
 
 
         /* =========================================
-           EFEITO DE DESPEDIDA DA PRIMEIRA TELA
+           MARCAR PRIMEIRA TELA COMO ABERTA
         ========================================== */
 
-        telaInicial.classList.add(
-            "abrindo"
-        );
-
-
-
-        if (
-            fraseFundo
-        ) {
-
-            fraseFundo.classList.add(
-                "sumir"
+        telaInicial
+            .classList
+            .add(
+                "abrindo"
             );
-
-        }
-
-
-
-        if (
-            particulas
-        ) {
-
-            particulas.classList.add(
-                "finalizar"
-            );
-
-        }
 
 
 
@@ -298,7 +271,7 @@ btnAbrir.addEventListener(
 
 
         /* =========================================
-           ROLAR PARA HOMENAGEM
+           ROLAR SUAVEMENTE
         ========================================== */
 
         setTimeout(
@@ -320,34 +293,7 @@ btnAbrir.addEventListener(
 
             },
 
-            750
-
-        );
-
-
-
-        /* =========================================
-           REMOVER PARTÍCULAS APÓS EFEITO
-        ========================================== */
-
-        setTimeout(
-
-            function () {
-
-
-                if (
-                    particulas
-                ) {
-
-                    particulas.innerHTML =
-                        "";
-
-                }
-
-
-            },
-
-            2400
+            700
 
         );
 
@@ -374,16 +320,20 @@ async function iniciarMusica() {
 
 
         /* =========================================
-           SE JÁ TERMINOU,
-           RECOMEÇA SOMENTE SE USUÁRIO APERTAR PLAY
+           SE CHEGOU AO FINAL
+           E O USUÁRIO APERTA PLAY,
+           COMEÇA NOVAMENTE
         ========================================== */
 
         if (
-            musica.ended
+            musica.ended ||
+            musica.currentTime >= musica.duration
         ) {
+
 
             musica.currentTime =
                 0;
+
 
         }
 
@@ -425,6 +375,7 @@ async function iniciarMusica() {
 
 
     }
+
 
 }
 
@@ -532,12 +483,13 @@ function atualizarBotaoMusica() {
 
     }
 
+
 }
 
 
 
 /* ===================================================
-   EVENTO PLAY
+   QUANDO O ÁUDIO COMEÇAR
 =================================================== */
 
 musica.addEventListener(
@@ -561,7 +513,7 @@ musica.addEventListener(
 
 
 /* ===================================================
-   EVENTO PAUSE
+   QUANDO O ÁUDIO FOR PAUSADO
 =================================================== */
 
 musica.addEventListener(
@@ -585,7 +537,7 @@ musica.addEventListener(
 
 
 /* ===================================================
-   QUANDO A MÚSICA TERMINAR
+   QUANDO A MÚSICA TERMINAR NATURALMENTE
 =================================================== */
 
 musica.addEventListener(
@@ -595,18 +547,22 @@ musica.addEventListener(
     function () {
 
 
+        /* =========================================
+           MÚSICA TERMINOU
+        ========================================== */
+
         musicaTocando =
             false;
 
 
 
-        musica.pause();
+        atualizarBotaoMusica();
 
 
 
         /* =========================================
-           VOLTA PARA O INÍCIO,
-           MAS NÃO TOCA NOVAMENTE
+           VOLTAR PARA O INÍCIO
+           SEM TOCAR NOVAMENTE
         ========================================== */
 
         musica.currentTime =
@@ -614,7 +570,211 @@ musica.addEventListener(
 
 
 
-        atualizarBotaoMusica();
+        /* =========================================
+           MOSTRAR CARTA FINAL
+           APENAS UMA VEZ AUTOMATICAMENTE
+        ========================================== */
+
+        if (
+            !cartaJaExibida
+        ) {
+
+
+            cartaJaExibida =
+                true;
+
+
+            setTimeout(
+
+                function () {
+
+
+                    mostrarCartaFinal();
+
+
+                },
+
+                800
+
+            );
+
+
+        }
+
+
+    }
+
+);
+
+
+
+/* ===================================================
+   MOSTRAR CARTA FINAL
+=================================================== */
+
+function mostrarCartaFinal() {
+
+
+    if (
+        !cartaFinal
+    ) {
+
+        return;
+
+    }
+
+
+
+    cartaFinal
+        .classList
+        .add(
+            "ativa"
+        );
+
+
+    cartaFinal.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+
+    document.body
+        .classList
+        .add(
+            "carta-aberta"
+        );
+
+
+
+    /* =========================================
+       FOCO NO BOTÃO PARA ACESSIBILIDADE
+    ========================================== */
+
+    setTimeout(
+
+        function () {
+
+
+            btnFecharCarta.focus();
+
+
+        },
+
+        650
+
+    );
+
+
+}
+
+
+
+/* ===================================================
+   FECHAR CARTA
+=================================================== */
+
+function fecharCartaFinal() {
+
+
+    cartaFinal
+        .classList
+        .remove(
+            "ativa"
+        );
+
+
+    cartaFinal.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+
+    document.body
+        .classList
+        .remove(
+            "carta-aberta"
+        );
+
+
+}
+
+
+
+/* ===================================================
+   BOTÃO FECHAR CARTA
+=================================================== */
+
+btnFecharCarta.addEventListener(
+
+    "click",
+
+    function () {
+
+
+        fecharCartaFinal();
+
+
+    }
+
+);
+
+
+
+/* ===================================================
+   FECHAR CLICANDO FORA DA CARTA
+=================================================== */
+
+cartaFinal.addEventListener(
+
+    "click",
+
+    function (
+        evento
+    ) {
+
+
+        if (
+            evento.target === cartaFinal
+        ) {
+
+
+            fecharCartaFinal();
+
+
+        }
+
+
+    }
+
+);
+
+
+
+/* ===================================================
+   FECHAR COM ESC
+=================================================== */
+
+document.addEventListener(
+
+    "keydown",
+
+    function (
+        evento
+    ) {
+
+
+        if (
+            evento.key === "Escape" &&
+            cartaFinal.classList.contains(
+                "ativa"
+            )
+        ) {
+
+
+            fecharCartaFinal();
+
+
+        }
 
 
     }
