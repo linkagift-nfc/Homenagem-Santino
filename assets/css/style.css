@@ -154,7 +154,6 @@ body.carta-aberta {
     z-index: 1;
 
     top: 0;
-
     left: 0;
 
     width: 100%;
@@ -961,7 +960,7 @@ body.carta-aberta {
 
 .conteudo-homenagem.ativo {
 
-    max-height: 1800px;
+    max-height: 1900px;
 
     margin-top: 40px;
 
@@ -1106,7 +1105,7 @@ body.carta-aberta {
 
     margin-top: 32px;
 
-    margin-bottom: 38px;
+    margin-bottom: 24px;
 
     color: #d9bb8c;
 
@@ -1131,6 +1130,134 @@ body.carta-aberta {
     font-weight: normal;
 
     color: #f0cf97;
+
+}
+
+
+
+/* ===================================================
+   EQUALIZADOR
+=================================================== */
+
+.equalizador {
+
+    position: relative;
+
+    z-index: 4;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: center;
+
+    gap: 5px;
+
+    width: 110px;
+
+    height: 50px;
+
+    margin:
+        0
+        auto
+        16px;
+
+    padding-bottom: 4px;
+
+}
+
+
+
+/* LINHA BASE */
+
+.equalizador::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 8px;
+    right: 8px;
+
+    bottom: 0;
+
+    height: 1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(219, 170, 92, 0.42),
+            transparent
+        );
+
+}
+
+
+
+/* BARRAS */
+
+.equalizador .barra {
+
+    display: block;
+
+    width: 7px;
+
+    height: 5px;
+
+    min-height: 5px;
+
+    border-radius:
+        7px
+        7px
+        2px
+        2px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffe9ad 0%,
+            #dfae5c 45%,
+            #9f6229 100%
+        );
+
+    box-shadow:
+        0 0 8px
+        rgba(
+            231,
+            179,
+            93,
+            0.24
+        );
+
+    opacity: 0.52;
+
+    transform-origin: bottom;
+
+    transition:
+        height 0.08s linear,
+        opacity 0.3s ease,
+        box-shadow 0.3s ease;
+
+}
+
+
+
+/* EQUALIZADOR TOCANDO */
+
+.equalizador.tocando
+.barra {
+
+    opacity: 1;
+
+    box-shadow:
+        0 0 10px
+        rgba(
+            231,
+            179,
+            93,
+            0.50
+        );
 
 }
 
@@ -2082,6 +2209,15 @@ body.carta-aberta {
 
     }
 
+
+    .equalizador {
+
+        height: 42px;
+
+        margin-bottom: 12px;
+
+    }
+
 }
 
 
@@ -2136,6 +2272,22 @@ body.carta-aberta {
             32px
             22px
             26px;
+
+    }
+
+
+    .equalizador {
+
+        width: 96px;
+
+        gap: 4px;
+
+    }
+
+
+    .equalizador .barra {
+
+        width: 6px;
 
     }
 
