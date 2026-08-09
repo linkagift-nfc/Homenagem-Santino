@@ -70,7 +70,7 @@ document.querySelectorAll(
 
 
 /* ===================================================
-   CONTROLE GERAL
+   CONTROLE
 =================================================== */
 
 let homenagemAberta =
@@ -87,8 +87,7 @@ let cartaJaExibida =
 
 
 /* ===================================================
-   CONTROLE DO WAKE LOCK
-   MANTER A TELA DO CELULAR ACESA
+   WAKE LOCK
 =================================================== */
 
 let wakeLock =
@@ -96,63 +95,39 @@ let wakeLock =
 
 
 
-/* ===================================================
-   SOLICITAR WAKE LOCK
-=================================================== */
-
 async function manterTelaAcesa() {
 
-
-    /* =========================================
-       VERIFICAR SE O NAVEGADOR SUPORTA
-    ========================================== */
 
     if (
         !("wakeLock" in navigator)
     ) {
 
-
         console.log(
-            "Wake Lock não disponível neste navegador."
+            "Wake Lock não disponível."
         );
-
 
         return;
 
     }
 
-
-
-    /* =========================================
-       SÓ SOLICITAR SE A PÁGINA ESTIVER VISÍVEL
-    ========================================== */
 
     if (
         document.visibilityState !== "visible"
     ) {
 
-
         return;
 
     }
 
-
-
-    /* =========================================
-       EVITAR CRIAR OUTRO WAKE LOCK
-       SE JÁ EXISTIR UM ATIVO
-    ========================================== */
 
     if (
         wakeLock &&
         !wakeLock.released
     ) {
 
-
         return;
 
     }
-
 
 
     try {
@@ -164,31 +139,8 @@ async function manterTelaAcesa() {
             );
 
 
-
         console.log(
-            "Tela mantida ativa durante a homenagem."
-        );
-
-
-
-        /* =========================================
-           SE O SISTEMA LIBERAR O WAKE LOCK
-        ========================================== */
-
-        wakeLock.addEventListener(
-
-            "release",
-
-            function () {
-
-
-                console.log(
-                    "Wake Lock liberado pelo sistema."
-                );
-
-
-            }
-
+            "Tela mantida ativa."
         );
 
 
@@ -200,7 +152,7 @@ async function manterTelaAcesa() {
 
 
         console.log(
-            "Não foi possível manter a tela ativa.",
+            "Não foi possível manter a tela ligada.",
             erro
         );
 
@@ -213,7 +165,7 @@ async function manterTelaAcesa() {
 
 
 /* ===================================================
-   QUANDO O USUÁRIO VOLTAR PARA A PÁGINA
+   REATIVAR WAKE LOCK
 =================================================== */
 
 document.addEventListener(
@@ -242,7 +194,7 @@ document.addEventListener(
 
 
 /* ===================================================
-   CONTROLE DO ANALISADOR DE ÁUDIO
+   WEB AUDIO
 =================================================== */
 
 let audioContext =
@@ -271,7 +223,7 @@ let audioConfigurado =
 
 
 /* ===================================================
-   CRIAR PARTÍCULAS DOURADAS
+   PARTÍCULAS
 =================================================== */
 
 function criarParticulas() {
@@ -281,17 +233,13 @@ function criarParticulas() {
         !particulas
     ) {
 
-
         return;
-
 
     }
 
 
-
     const quantidade =
-        30;
-
+        34;
 
 
     for (
@@ -307,64 +255,22 @@ function criarParticulas() {
             );
 
 
-
         particula.classList.add(
             "particula"
         );
 
 
-
-        /* POSIÇÃO HORIZONTAL */
-
-        const esquerda =
-            Math.random() * 100;
+        particula.style.left =
+            Math.random() * 100 + "%";
 
 
+        particula.style.top =
+            Math.random() * 100 + "%";
 
-        /* POSIÇÃO VERTICAL */
-
-        const topo =
-            Math.random() * 100;
-
-
-
-        /* TAMANHO */
 
         const tamanho =
             2 +
             Math.random() * 4;
-
-
-
-        /* VELOCIDADE */
-
-        const duracao =
-            7 +
-            Math.random() * 9;
-
-
-
-        /* ATRASO */
-
-        const atraso =
-            Math.random() * 10;
-
-
-
-        /* OPACIDADE */
-
-        const opacidade =
-            0.15 +
-            Math.random() * 0.42;
-
-
-
-        particula.style.left =
-            esquerda + "%";
-
-
-        particula.style.top =
-            topo + "%";
 
 
         particula.style.width =
@@ -376,16 +282,20 @@ function criarParticulas() {
 
 
         particula.style.animationDuration =
-            duracao + "s";
+            7 +
+            Math.random() * 9 +
+            "s";
 
 
         particula.style.animationDelay =
-            "-" + atraso + "s";
+            "-" +
+            Math.random() * 10 +
+            "s";
 
 
         particula.style.opacity =
-            opacidade;
-
+            0.15 +
+            Math.random() * 0.42;
 
 
         particulas.appendChild(
@@ -399,17 +309,12 @@ function criarParticulas() {
 }
 
 
-
-/* ===================================================
-   CRIAR PARTÍCULAS AO CARREGAR
-=================================================== */
-
 criarParticulas();
 
 
 
 /* ===================================================
-   CONFIGURAR WEB AUDIO API
+   CONFIGURAR ÁUDIO
 =================================================== */
 
 function configurarAudioContext() {
@@ -419,12 +324,9 @@ function configurarAudioContext() {
         audioConfigurado
     ) {
 
-
         return;
 
-
     }
-
 
 
     try {
@@ -435,36 +337,18 @@ function configurarAudioContext() {
             window.webkitAudioContext;
 
 
-
         if (
             !AudioContext
         ) {
 
-
-            console.log(
-                "Web Audio API não disponível neste navegador."
-            );
-
-
             return;
-
 
         }
 
 
-
-        /* =========================================
-           CRIAR CONTEXTO
-        ========================================== */
-
         audioContext =
             new AudioContext();
 
-
-
-        /* =========================================
-           USAR O MP3 COMO FONTE
-        ========================================== */
 
         fonteAudio =
             audioContext
@@ -473,24 +357,19 @@ function configurarAudioContext() {
                 );
 
 
-
-        /* =========================================
-           CRIAR ANALISADOR
-        ========================================== */
-
         analisador =
             audioContext
                 .createAnalyser();
 
 
+        /* MAIS DETALHE NO EQUALIZADOR */
 
         analisador.fftSize =
-            256;
+            512;
 
 
         analisador.smoothingTimeConstant =
-            0.82;
-
+            0.68;
 
 
         dadosFrequencia =
@@ -499,26 +378,14 @@ function configurarAudioContext() {
             );
 
 
-
-        /* =========================================
-           ÁUDIO
-             ↓
-           ANALISADOR
-             ↓
-           ALTO-FALANTE
-        ========================================== */
-
-        fonteAudio
-            .connect(
-                analisador
-            );
+        fonteAudio.connect(
+            analisador
+        );
 
 
-        analisador
-            .connect(
-                audioContext.destination
-            );
-
+        analisador.connect(
+            audioContext.destination
+        );
 
 
         audioConfigurado =
@@ -533,7 +400,7 @@ function configurarAudioContext() {
 
 
         console.log(
-            "Não foi possível configurar o analisador.",
+            "Erro ao configurar analisador.",
             erro
         );
 
@@ -546,14 +413,13 @@ function configurarAudioContext() {
 
 
 /* ===================================================
-   ATIVAR CONTEXTO DE ÁUDIO
+   ATIVAR CONTEXTO
 =================================================== */
 
 async function ativarAudioContext() {
 
 
     configurarAudioContext();
-
 
 
     if (
@@ -576,7 +442,6 @@ async function ativarAudioContext() {
 
 
             console.log(
-                "Não foi possível ativar o contexto de áudio.",
                 erro
             );
 
@@ -592,7 +457,7 @@ async function ativarAudioContext() {
 
 
 /* ===================================================
-   ANIMAR EQUALIZADOR REAL
+   ANIMAR EQUALIZADOR
 =================================================== */
 
 function animarEqualizador() {
@@ -603,22 +468,14 @@ function animarEqualizador() {
         !dadosFrequencia
     ) {
 
-
         return;
-
 
     }
 
 
-
-    /* =========================================
-       LER FREQUÊNCIAS DO MP3
-    ========================================== */
-
     analisador.getByteFrequencyData(
         dadosFrequencia
     );
-
 
 
     const quantidadeBarras =
@@ -627,8 +484,8 @@ function animarEqualizador() {
 
 
     /*
-       Usamos principalmente graves e médios
-       para o movimento ficar mais musical.
+       Graves e médios.
+       Essa faixa cria movimentos mais fortes.
     */
 
     const inicio =
@@ -637,7 +494,7 @@ function animarEqualizador() {
 
     const fim =
         Math.min(
-            55,
+            90,
             dadosFrequencia.length - 1
         );
 
@@ -655,7 +512,7 @@ function animarEqualizador() {
         ) {
 
 
-            const posicao =
+            let posicao =
                 Math.floor(
 
                     inicio +
@@ -670,8 +527,7 @@ function animarEqualizador() {
                 );
 
 
-
-            const valor =
+            let valor =
                 dadosFrequencia[
                     posicao
                 ];
@@ -679,7 +535,42 @@ function animarEqualizador() {
 
 
             /* =====================================
-               TRANSFORMAR FREQUÊNCIA EM ALTURA
+               REFORÇAR GRAVES
+            ====================================== */
+
+            if (
+                indice >= 3 &&
+                indice <= 7
+            ) {
+
+
+                valor *=
+                    1.22;
+
+
+            }
+
+
+
+            /* =====================================
+               CENTRO MAIS FORTE
+            ====================================== */
+
+            if (
+                indice === 5
+            ) {
+
+
+                valor *=
+                    1.18;
+
+
+            }
+
+
+
+            /* =====================================
+               CONVERTER EM ALTURA
             ====================================== */
 
             let altura =
@@ -688,39 +579,35 @@ function animarEqualizador() {
                     valor /
                     255
                 ) *
-                34;
+                58;
 
 
 
             /* =====================================
-               BARRA CENTRAL MAIS DESTACADA
+               LATERAIS UM POUCO MENORES
             ====================================== */
 
             if (
-                indice === 3
+                indice === 0 ||
+                indice === 10
             ) {
 
 
                 altura *=
-                    1.10;
+                    0.68;
 
 
             }
 
 
-
-            /* =====================================
-               LATERAIS MAIS SUAVES
-            ====================================== */
-
-            if (
-                indice === 0 ||
-                indice === 6
+            else if (
+                indice === 1 ||
+                indice === 9
             ) {
 
 
                 altura *=
-                    0.86;
+                    0.82;
 
 
             }
@@ -733,14 +620,11 @@ function animarEqualizador() {
 
             altura =
                 Math.max(
-
                     5,
-
                     Math.min(
-                        42,
+                        64,
                         altura
                     )
-
                 );
 
 
@@ -752,7 +636,6 @@ function animarEqualizador() {
         }
 
     );
-
 
 
     animacaoEqualizador =
@@ -772,24 +655,11 @@ function animarEqualizador() {
 function iniciarEqualizador() {
 
 
-    if (
-        !equalizador
-    ) {
-
-
-        return;
-
-
-    }
-
-
-
     equalizador
         .classList
         .add(
             "tocando"
         );
-
 
 
     if (
@@ -803,7 +673,6 @@ function iniciarEqualizador() {
 
 
     }
-
 
 
     animarEqualizador();
@@ -837,35 +706,26 @@ function pararEqualizador() {
     }
 
 
-
-    if (
-        equalizador
-    ) {
-
-
-        equalizador
-            .classList
-            .remove(
-                "tocando"
-            );
-
-
-    }
+    equalizador
+        .classList
+        .remove(
+            "tocando"
+        );
 
 
 
-    /* =========================================
-       POSIÇÃO DE REPOUSO DAS 7 BARRAS
-    ========================================== */
-
-    const alturasParadas = [
+    const alturas = [
 
         5,
-        8,
-        11,
-        14,
-        11,
-        8,
+        7,
+        10,
+        13,
+        16,
+        20,
+        16,
+        13,
+        10,
+        7,
         5
 
     ];
@@ -881,7 +741,7 @@ function pararEqualizador() {
 
 
             barra.style.height =
-                alturasParadas[
+                alturas[
                     indice
                 ] + "px";
 
@@ -910,38 +770,21 @@ btnAbrir.addEventListener(
             homenagemAberta
         ) {
 
-
             return;
 
-
         }
-
 
 
         homenagemAberta =
             true;
 
 
-
-        /* =========================================
-           MANTER TELA DO CELULAR ACESA
-        ========================================== */
-
         await manterTelaAcesa();
 
-
-
-        /* =========================================
-           ATIVAR ANALISADOR DE ÁUDIO
-        ========================================== */
 
         await ativarAudioContext();
 
 
-
-        /* =========================================
-           EFEITO NA FOTO
-        ========================================== */
 
         telaInicial
             .classList
@@ -951,10 +794,6 @@ btnAbrir.addEventListener(
 
 
 
-        /* =========================================
-           MOSTRAR SEGUNDA PARTE
-        ========================================== */
-
         conteudoHomenagem
             .classList
             .add(
@@ -962,10 +801,6 @@ btnAbrir.addEventListener(
             );
 
 
-
-        /* =========================================
-           ALTERAR BOTÃO
-        ========================================== */
 
         btnAbrir.innerHTML = `
 
@@ -980,22 +815,17 @@ btnAbrir.addEventListener(
         `;
 
 
-
         btnAbrir.disabled =
             true;
 
 
-
-        /* =========================================
-           INICIAR MÚSICA
-        ========================================== */
 
         iniciarMusica();
 
 
 
         /* =========================================
-           ROLAR SUAVEMENTE PARA A HOMENAGEM
+           ROLAR EXATAMENTE PARA SEGUNDA TELA
         ========================================== */
 
         setTimeout(
@@ -1017,7 +847,7 @@ btnAbrir.addEventListener(
 
             },
 
-            700
+            650
 
         );
 
@@ -1029,7 +859,7 @@ btnAbrir.addEventListener(
 
 
 /* ===================================================
-   INICIAR / CONTINUAR MÚSICA
+   INICIAR MÚSICA
 =================================================== */
 
 async function iniciarMusica() {
@@ -1038,35 +868,16 @@ async function iniciarMusica() {
     try {
 
 
-        /* =========================================
-           GARANTIR TELA ACESA
-        ========================================== */
-
         await manterTelaAcesa();
 
 
-
-        /* =========================================
-           GARANTIR WEB AUDIO ATIVO
-        ========================================== */
-
         await ativarAudioContext();
 
-
-
-        /* =========================================
-           VOLUME
-        ========================================== */
 
         musica.volume =
             0.65;
 
 
-
-        /* =========================================
-           SE A MÚSICA JÁ TERMINOU
-           VOLTAR AO INÍCIO
-        ========================================== */
 
         if (
             musica.ended
@@ -1081,21 +892,14 @@ async function iniciarMusica() {
 
 
 
-        /* =========================================
-           TOCAR
-        ========================================== */
-
         await musica.play();
-
 
 
         musicaTocando =
             true;
 
 
-
         atualizarBotaoMusica();
-
 
 
         iniciarEqualizador();
@@ -1109,22 +913,16 @@ async function iniciarMusica() {
 
 
         console.log(
-
-            "O navegador não iniciou o áudio automaticamente.",
-
+            "Não foi possível iniciar o áudio.",
             erro
-
         );
-
 
 
         musicaTocando =
             false;
 
 
-
         atualizarBotaoMusica();
-
 
 
         pararEqualizador();
@@ -1138,7 +936,7 @@ async function iniciarMusica() {
 
 
 /* ===================================================
-   PAUSAR MÚSICA
+   PAUSAR
 =================================================== */
 
 function pausarMusica() {
@@ -1147,14 +945,11 @@ function pausarMusica() {
     musica.pause();
 
 
-
     musicaTocando =
         false;
 
 
-
     atualizarBotaoMusica();
-
 
 
     pararEqualizador();
@@ -1165,7 +960,7 @@ function pausarMusica() {
 
 
 /* ===================================================
-   BOTÃO PLAY / PAUSE
+   BOTÃO DA MÚSICA
 =================================================== */
 
 btnMusica.addEventListener(
@@ -1201,7 +996,7 @@ btnMusica.addEventListener(
 
 
 /* ===================================================
-   ATUALIZAR BOTÃO DA MÚSICA
+   BOTÃO PLAY / PAUSE
 =================================================== */
 
 function atualizarBotaoMusica() {
@@ -1251,7 +1046,7 @@ function atualizarBotaoMusica() {
 
 
 /* ===================================================
-   EVENTO PLAY
+   PLAY
 =================================================== */
 
 musica.addEventListener(
@@ -1265,9 +1060,7 @@ musica.addEventListener(
             true;
 
 
-
         atualizarBotaoMusica();
-
 
 
         iniciarEqualizador();
@@ -1280,7 +1073,7 @@ musica.addEventListener(
 
 
 /* ===================================================
-   EVENTO PAUSE
+   PAUSE
 =================================================== */
 
 musica.addEventListener(
@@ -1294,9 +1087,7 @@ musica.addEventListener(
             false;
 
 
-
         atualizarBotaoMusica();
-
 
 
         pararEqualizador();
@@ -1309,7 +1100,7 @@ musica.addEventListener(
 
 
 /* ===================================================
-   QUANDO A MÚSICA TERMINAR NATURALMENTE
+   FIM DA MÚSICA
 =================================================== */
 
 musica.addEventListener(
@@ -1319,45 +1110,21 @@ musica.addEventListener(
     function () {
 
 
-        /* =========================================
-           MARCAR COMO PARADA
-        ========================================== */
-
         musicaTocando =
             false;
 
 
-
-        /* =========================================
-           ATUALIZAR BOTÃO
-        ========================================== */
-
         atualizarBotaoMusica();
 
-
-
-        /* =========================================
-           PARAR EQUALIZADOR
-        ========================================== */
 
         pararEqualizador();
 
 
 
-        /* =========================================
-           VOLTAR MP3 AO INÍCIO
-           SEM TOCAR NOVAMENTE
-        ========================================== */
-
         musica.currentTime =
             0;
 
 
-
-        /* =========================================
-           MOSTRAR CARTA FINAL
-           APENAS UMA VEZ AUTOMATICAMENTE
-        ========================================== */
 
         if (
             !cartaJaExibida
@@ -1394,31 +1161,13 @@ musica.addEventListener(
 
 
 /* ===================================================
-   MOSTRAR CARTA FINAL
+   MOSTRAR CARTA
 =================================================== */
 
 function mostrarCartaFinal() {
 
 
-    if (
-        !cartaFinal
-    ) {
-
-
-        return;
-
-
-    }
-
-
-
-    /* =========================================
-       GARANTIR QUE A TELA CONTINUE ACESA
-       ENQUANTO A CARTA ESTIVER ABERTA
-    ========================================== */
-
     manterTelaAcesa();
-
 
 
     cartaFinal
@@ -1428,12 +1177,10 @@ function mostrarCartaFinal() {
         );
 
 
-
     cartaFinal.setAttribute(
         "aria-hidden",
         "false"
     );
-
 
 
     document.body
@@ -1442,11 +1189,6 @@ function mostrarCartaFinal() {
             "carta-aberta"
         );
 
-
-
-    /* =========================================
-       FOCO NO BOTÃO DA CARTA
-    ========================================== */
 
     setTimeout(
 
@@ -1481,12 +1223,10 @@ function fecharCartaFinal() {
         );
 
 
-
     cartaFinal.setAttribute(
         "aria-hidden",
         "true"
     );
-
 
 
     document.body
@@ -1521,7 +1261,7 @@ btnFecharCarta.addEventListener(
 
 
 /* ===================================================
-   FECHAR CARTA CLICANDO FORA
+   CLICAR FORA
 =================================================== */
 
 cartaFinal.addEventListener(
@@ -1551,7 +1291,7 @@ cartaFinal.addEventListener(
 
 
 /* ===================================================
-   FECHAR CARTA COM ESC
+   ESC
 =================================================== */
 
 document.addEventListener(
