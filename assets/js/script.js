@@ -56,9 +56,21 @@ document.getElementById(
 );
 
 
+const equalizador =
+document.getElementById(
+    "equalizador"
+);
+
+
+const barrasEqualizador =
+document.querySelectorAll(
+    ".equalizador .barra"
+);
+
+
 
 /* ===================================================
-   CONTROLE
+   CONTROLE GERAL
 =================================================== */
 
 let homenagemAberta =
@@ -75,6 +87,190 @@ let cartaJaExibida =
 
 
 /* ===================================================
+   CONTROLE DO WAKE LOCK
+   MANTER A TELA DO CELULAR ACESA
+=================================================== */
+
+let wakeLock =
+    null;
+
+
+
+/* ===================================================
+   SOLICITAR WAKE LOCK
+=================================================== */
+
+async function manterTelaAcesa() {
+
+
+    /* =========================================
+       VERIFICAR SE O NAVEGADOR SUPORTA
+    ========================================== */
+
+    if (
+        !("wakeLock" in navigator)
+    ) {
+
+
+        console.log(
+            "Wake Lock não disponível neste navegador."
+        );
+
+
+        return;
+
+    }
+
+
+
+    /* =========================================
+       SÓ SOLICITAR SE A PÁGINA ESTIVER VISÍVEL
+    ========================================== */
+
+    if (
+        document.visibilityState !== "visible"
+    ) {
+
+
+        return;
+
+    }
+
+
+
+    /* =========================================
+       EVITAR CRIAR OUTRO WAKE LOCK
+       SE JÁ EXISTIR UM ATIVO
+    ========================================== */
+
+    if (
+        wakeLock &&
+        !wakeLock.released
+    ) {
+
+
+        return;
+
+    }
+
+
+
+    try {
+
+
+        wakeLock =
+            await navigator.wakeLock.request(
+                "screen"
+            );
+
+
+
+        console.log(
+            "Tela mantida ativa durante a homenagem."
+        );
+
+
+
+        /* =========================================
+           SE O SISTEMA LIBERAR O WAKE LOCK
+        ========================================== */
+
+        wakeLock.addEventListener(
+
+            "release",
+
+            function () {
+
+
+                console.log(
+                    "Wake Lock liberado pelo sistema."
+                );
+
+
+            }
+
+        );
+
+
+    }
+
+    catch (
+        erro
+    ) {
+
+
+        console.log(
+            "Não foi possível manter a tela ativa.",
+            erro
+        );
+
+
+    }
+
+
+}
+
+
+
+/* ===================================================
+   QUANDO O USUÁRIO VOLTAR PARA A PÁGINA
+=================================================== */
+
+document.addEventListener(
+
+    "visibilitychange",
+
+    async function () {
+
+
+        if (
+            document.visibilityState === "visible" &&
+            homenagemAberta
+        ) {
+
+
+            await manterTelaAcesa();
+
+
+        }
+
+
+    }
+
+);
+
+
+
+/* ===================================================
+   CONTROLE DO ANALISADOR DE ÁUDIO
+=================================================== */
+
+let audioContext =
+    null;
+
+
+let analisador =
+    null;
+
+
+let fonteAudio =
+    null;
+
+
+let dadosFrequencia =
+    null;
+
+
+let animacaoEqualizador =
+    null;
+
+
+let audioConfigurado =
+    false;
+
+
+
+/* ===================================================
    CRIAR PARTÍCULAS DOURADAS
 =================================================== */
 
@@ -85,9 +281,12 @@ function criarParticulas() {
         !particulas
     ) {
 
+
         return;
 
+
     }
+
 
 
     const quantidade =
@@ -108,33 +307,51 @@ function criarParticulas() {
             );
 
 
+
         particula.classList.add(
             "particula"
         );
 
 
 
+        /* POSIÇÃO HORIZONTAL */
+
         const esquerda =
             Math.random() * 100;
 
 
+
+        /* POSIÇÃO VERTICAL */
+
         const topo =
             Math.random() * 100;
 
+
+
+        /* TAMANHO */
 
         const tamanho =
             2 +
             Math.random() * 4;
 
 
+
+        /* VELOCIDADE */
+
         const duracao =
             7 +
             Math.random() * 9;
 
 
+
+        /* ATRASO */
+
         const atraso =
             Math.random() * 10;
 
+
+
+        /* OPACIDADE */
 
         const opacidade =
             0.15 +
@@ -184,10 +401,497 @@ function criarParticulas() {
 
 
 /* ===================================================
-   INICIAR PARTÍCULAS
+   CRIAR PARTÍCULAS AO CARREGAR
 =================================================== */
 
 criarParticulas();
+
+
+
+/* ===================================================
+   CONFIGURAR WEB AUDIO API
+=================================================== */
+
+function configurarAudioContext() {
+
+
+    if (
+        audioConfigurado
+    ) {
+
+
+        return;
+
+
+    }
+
+
+
+    try {
+
+
+        const AudioContext =
+            window.AudioContext ||
+            window.webkitAudioContext;
+
+
+
+        if (
+            !AudioContext
+        ) {
+
+
+            console.log(
+                "Web Audio API não disponível neste navegador."
+            );
+
+
+            return;
+
+
+        }
+
+
+
+        /* =========================================
+           CRIAR CONTEXTO
+        ========================================== */
+
+        audioContext =
+            new AudioContext();
+
+
+
+        /* =========================================
+           USAR O MP3 COMO FONTE
+        ========================================== */
+
+        fonteAudio =
+            audioContext
+                .createMediaElementSource(
+                    musica
+                );
+
+
+
+        /* =========================================
+           CRIAR ANALISADOR
+        ========================================== */
+
+        analisador =
+            audioContext
+                .createAnalyser();
+
+
+
+        analisador.fftSize =
+            256;
+
+
+        analisador.smoothingTimeConstant =
+            0.82;
+
+
+
+        dadosFrequencia =
+            new Uint8Array(
+                analisador.frequencyBinCount
+            );
+
+
+
+        /* =========================================
+           ÁUDIO
+             ↓
+           ANALISADOR
+             ↓
+           ALTO-FALANTE
+        ========================================== */
+
+        fonteAudio
+            .connect(
+                analisador
+            );
+
+
+        analisador
+            .connect(
+                audioContext.destination
+            );
+
+
+
+        audioConfigurado =
+            true;
+
+
+    }
+
+    catch (
+        erro
+    ) {
+
+
+        console.log(
+            "Não foi possível configurar o analisador.",
+            erro
+        );
+
+
+    }
+
+
+}
+
+
+
+/* ===================================================
+   ATIVAR CONTEXTO DE ÁUDIO
+=================================================== */
+
+async function ativarAudioContext() {
+
+
+    configurarAudioContext();
+
+
+
+    if (
+        audioContext &&
+        audioContext.state === "suspended"
+    ) {
+
+
+        try {
+
+
+            await audioContext.resume();
+
+
+        }
+
+        catch (
+            erro
+        ) {
+
+
+            console.log(
+                "Não foi possível ativar o contexto de áudio.",
+                erro
+            );
+
+
+        }
+
+
+    }
+
+
+}
+
+
+
+/* ===================================================
+   ANIMAR EQUALIZADOR REAL
+=================================================== */
+
+function animarEqualizador() {
+
+
+    if (
+        !analisador ||
+        !dadosFrequencia
+    ) {
+
+
+        return;
+
+
+    }
+
+
+
+    /* =========================================
+       LER FREQUÊNCIAS DO MP3
+    ========================================== */
+
+    analisador.getByteFrequencyData(
+        dadosFrequencia
+    );
+
+
+
+    const quantidadeBarras =
+        barrasEqualizador.length;
+
+
+
+    /*
+       Usamos principalmente graves e médios
+       para o movimento ficar mais musical.
+    */
+
+    const inicio =
+        2;
+
+
+    const fim =
+        Math.min(
+            55,
+            dadosFrequencia.length - 1
+        );
+
+
+    const faixa =
+        fim - inicio;
+
+
+
+    barrasEqualizador.forEach(
+
+        function (
+            barra,
+            indice
+        ) {
+
+
+            const posicao =
+                Math.floor(
+
+                    inicio +
+
+                    (
+                        faixa /
+                        quantidadeBarras
+                    ) *
+
+                    indice
+
+                );
+
+
+
+            const valor =
+                dadosFrequencia[
+                    posicao
+                ];
+
+
+
+            /* =====================================
+               TRANSFORMAR FREQUÊNCIA EM ALTURA
+            ====================================== */
+
+            let altura =
+                5 +
+                (
+                    valor /
+                    255
+                ) *
+                34;
+
+
+
+            /* =====================================
+               BARRA CENTRAL MAIS DESTACADA
+            ====================================== */
+
+            if (
+                indice === 3
+            ) {
+
+
+                altura *=
+                    1.10;
+
+
+            }
+
+
+
+            /* =====================================
+               LATERAIS MAIS SUAVES
+            ====================================== */
+
+            if (
+                indice === 0 ||
+                indice === 6
+            ) {
+
+
+                altura *=
+                    0.86;
+
+
+            }
+
+
+
+            /* =====================================
+               LIMITES
+            ====================================== */
+
+            altura =
+                Math.max(
+
+                    5,
+
+                    Math.min(
+                        42,
+                        altura
+                    )
+
+                );
+
+
+
+            barra.style.height =
+                altura + "px";
+
+
+        }
+
+    );
+
+
+
+    animacaoEqualizador =
+        requestAnimationFrame(
+            animarEqualizador
+        );
+
+
+}
+
+
+
+/* ===================================================
+   INICIAR EQUALIZADOR
+=================================================== */
+
+function iniciarEqualizador() {
+
+
+    if (
+        !equalizador
+    ) {
+
+
+        return;
+
+
+    }
+
+
+
+    equalizador
+        .classList
+        .add(
+            "tocando"
+        );
+
+
+
+    if (
+        animacaoEqualizador
+    ) {
+
+
+        cancelAnimationFrame(
+            animacaoEqualizador
+        );
+
+
+    }
+
+
+
+    animarEqualizador();
+
+
+}
+
+
+
+/* ===================================================
+   PARAR EQUALIZADOR
+=================================================== */
+
+function pararEqualizador() {
+
+
+    if (
+        animacaoEqualizador
+    ) {
+
+
+        cancelAnimationFrame(
+            animacaoEqualizador
+        );
+
+
+        animacaoEqualizador =
+            null;
+
+
+    }
+
+
+
+    if (
+        equalizador
+    ) {
+
+
+        equalizador
+            .classList
+            .remove(
+                "tocando"
+            );
+
+
+    }
+
+
+
+    /* =========================================
+       POSIÇÃO DE REPOUSO DAS 7 BARRAS
+    ========================================== */
+
+    const alturasParadas = [
+
+        5,
+        8,
+        11,
+        14,
+        11,
+        8,
+        5
+
+    ];
+
+
+
+    barrasEqualizador.forEach(
+
+        function (
+            barra,
+            indice
+        ) {
+
+
+            barra.style.height =
+                alturasParadas[
+                    indice
+                ] + "px";
+
+
+        }
+
+    );
+
+
+}
 
 
 
@@ -199,16 +903,19 @@ btnAbrir.addEventListener(
 
     "click",
 
-    function () {
+    async function () {
 
 
         if (
             homenagemAberta
         ) {
 
+
             return;
 
+
         }
+
 
 
         homenagemAberta =
@@ -217,7 +924,23 @@ btnAbrir.addEventListener(
 
 
         /* =========================================
-           MARCAR PRIMEIRA TELA COMO ABERTA
+           MANTER TELA DO CELULAR ACESA
+        ========================================== */
+
+        await manterTelaAcesa();
+
+
+
+        /* =========================================
+           ATIVAR ANALISADOR DE ÁUDIO
+        ========================================== */
+
+        await ativarAudioContext();
+
+
+
+        /* =========================================
+           EFEITO NA FOTO
         ========================================== */
 
         telaInicial
@@ -229,7 +952,7 @@ btnAbrir.addEventListener(
 
 
         /* =========================================
-           MOSTRAR CONTEÚDO
+           MOSTRAR SEGUNDA PARTE
         ========================================== */
 
         conteudoHomenagem
@@ -257,6 +980,7 @@ btnAbrir.addEventListener(
         `;
 
 
+
         btnAbrir.disabled =
             true;
 
@@ -271,7 +995,7 @@ btnAbrir.addEventListener(
 
 
         /* =========================================
-           ROLAR SUAVEMENTE
+           ROLAR SUAVEMENTE PARA A HOMENAGEM
         ========================================== */
 
         setTimeout(
@@ -305,7 +1029,7 @@ btnAbrir.addEventListener(
 
 
 /* ===================================================
-   INICIAR MÚSICA
+   INICIAR / CONTINUAR MÚSICA
 =================================================== */
 
 async function iniciarMusica() {
@@ -314,20 +1038,38 @@ async function iniciarMusica() {
     try {
 
 
+        /* =========================================
+           GARANTIR TELA ACESA
+        ========================================== */
+
+        await manterTelaAcesa();
+
+
+
+        /* =========================================
+           GARANTIR WEB AUDIO ATIVO
+        ========================================== */
+
+        await ativarAudioContext();
+
+
+
+        /* =========================================
+           VOLUME
+        ========================================== */
+
         musica.volume =
             0.65;
 
 
 
         /* =========================================
-           SE CHEGOU AO FINAL
-           E O USUÁRIO APERTA PLAY,
-           COMEÇA NOVAMENTE
+           SE A MÚSICA JÁ TERMINOU
+           VOLTAR AO INÍCIO
         ========================================== */
 
         if (
-            musica.ended ||
-            musica.currentTime >= musica.duration
+            musica.ended
         ) {
 
 
@@ -339,6 +1081,10 @@ async function iniciarMusica() {
 
 
 
+        /* =========================================
+           TOCAR
+        ========================================== */
+
         await musica.play();
 
 
@@ -349,6 +1095,10 @@ async function iniciarMusica() {
 
 
         atualizarBotaoMusica();
+
+
+
+        iniciarEqualizador();
 
 
     }
@@ -367,11 +1117,17 @@ async function iniciarMusica() {
         );
 
 
+
         musicaTocando =
             false;
 
 
+
         atualizarBotaoMusica();
+
+
+
+        pararEqualizador();
 
 
     }
@@ -391,11 +1147,17 @@ function pausarMusica() {
     musica.pause();
 
 
+
     musicaTocando =
         false;
 
 
+
     atualizarBotaoMusica();
+
+
+
+    pararEqualizador();
 
 
 }
@@ -403,14 +1165,14 @@ function pausarMusica() {
 
 
 /* ===================================================
-   BOTÃO DA MÚSICA
+   BOTÃO PLAY / PAUSE
 =================================================== */
 
 btnMusica.addEventListener(
 
     "click",
 
-    function () {
+    async function () {
 
 
         if (
@@ -426,7 +1188,7 @@ btnMusica.addEventListener(
         else {
 
 
-            iniciarMusica();
+            await iniciarMusica();
 
 
         }
@@ -489,7 +1251,7 @@ function atualizarBotaoMusica() {
 
 
 /* ===================================================
-   QUANDO O ÁUDIO COMEÇAR
+   EVENTO PLAY
 =================================================== */
 
 musica.addEventListener(
@@ -503,7 +1265,12 @@ musica.addEventListener(
             true;
 
 
+
         atualizarBotaoMusica();
+
+
+
+        iniciarEqualizador();
 
 
     }
@@ -513,7 +1280,7 @@ musica.addEventListener(
 
 
 /* ===================================================
-   QUANDO O ÁUDIO FOR PAUSADO
+   EVENTO PAUSE
 =================================================== */
 
 musica.addEventListener(
@@ -527,7 +1294,12 @@ musica.addEventListener(
             false;
 
 
+
         atualizarBotaoMusica();
+
+
+
+        pararEqualizador();
 
 
     }
@@ -548,7 +1320,7 @@ musica.addEventListener(
 
 
         /* =========================================
-           MÚSICA TERMINOU
+           MARCAR COMO PARADA
         ========================================== */
 
         musicaTocando =
@@ -556,12 +1328,24 @@ musica.addEventListener(
 
 
 
+        /* =========================================
+           ATUALIZAR BOTÃO
+        ========================================== */
+
         atualizarBotaoMusica();
 
 
 
         /* =========================================
-           VOLTAR PARA O INÍCIO
+           PARAR EQUALIZADOR
+        ========================================== */
+
+        pararEqualizador();
+
+
+
+        /* =========================================
+           VOLTAR MP3 AO INÍCIO
            SEM TOCAR NOVAMENTE
         ========================================== */
 
@@ -584,6 +1368,7 @@ musica.addEventListener(
                 true;
 
 
+
             setTimeout(
 
                 function () {
@@ -594,7 +1379,7 @@ musica.addEventListener(
 
                 },
 
-                800
+                900
 
             );
 
@@ -619,9 +1404,20 @@ function mostrarCartaFinal() {
         !cartaFinal
     ) {
 
+
         return;
 
+
     }
+
+
+
+    /* =========================================
+       GARANTIR QUE A TELA CONTINUE ACESA
+       ENQUANTO A CARTA ESTIVER ABERTA
+    ========================================== */
+
+    manterTelaAcesa();
 
 
 
@@ -632,10 +1428,12 @@ function mostrarCartaFinal() {
         );
 
 
+
     cartaFinal.setAttribute(
         "aria-hidden",
         "false"
     );
+
 
 
     document.body
@@ -647,7 +1445,7 @@ function mostrarCartaFinal() {
 
 
     /* =========================================
-       FOCO NO BOTÃO PARA ACESSIBILIDADE
+       FOCO NO BOTÃO DA CARTA
     ========================================== */
 
     setTimeout(
@@ -683,10 +1481,12 @@ function fecharCartaFinal() {
         );
 
 
+
     cartaFinal.setAttribute(
         "aria-hidden",
         "true"
     );
+
 
 
     document.body
@@ -721,7 +1521,7 @@ btnFecharCarta.addEventListener(
 
 
 /* ===================================================
-   FECHAR CLICANDO FORA DA CARTA
+   FECHAR CARTA CLICANDO FORA
 =================================================== */
 
 cartaFinal.addEventListener(
@@ -751,7 +1551,7 @@ cartaFinal.addEventListener(
 
 
 /* ===================================================
-   FECHAR COM ESC
+   FECHAR CARTA COM ESC
 =================================================== */
 
 document.addEventListener(
@@ -788,3 +1588,6 @@ document.addEventListener(
 =================================================== */
 
 atualizarBotaoMusica();
+
+
+pararEqualizador();
