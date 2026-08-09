@@ -318,14 +318,14 @@ body.carta-aberta {
 
 .decoracao-topo .estrela {
 
-    font-size: 17px;
+    font-size: 18px;
 
 }
 
 
 .decoracao-topo .pequena {
 
-    font-size: 10px;
+    font-size: 11px;
 
     opacity: 0.65;
 
@@ -357,9 +357,9 @@ body.carta-aberta {
 
     font-size:
         clamp(
-            14px,
-            2vh,
-            18px
+            15px,
+            2.2vh,
+            19px
         );
 
     font-style: italic;
@@ -375,9 +375,9 @@ body.carta-aberta {
 
     font-size:
         clamp(
-            29px,
-            8.7vw,
-            43px
+            31px,
+            9vw,
+            45px
         );
 
     line-height: 1;
@@ -395,9 +395,9 @@ body.carta-aberta {
 
     font-size:
         clamp(
-            19px,
-            3vh,
-            24px
+            20px,
+            3.2vh,
+            25px
         );
 
     font-weight: normal;
@@ -627,9 +627,9 @@ body.carta-aberta {
 
     font-size:
         clamp(
-            13px,
-            2vh,
-            17px
+            14px,
+            2.1vh,
+            18px
         );
 
     line-height: 1.4;
@@ -703,7 +703,7 @@ body.carta-aberta {
         Arial,
         sans-serif;
 
-    font-size: 13px;
+    font-size: 14px;
 
     font-weight: bold;
 
@@ -737,7 +737,7 @@ body.carta-aberta {
         Arial,
         sans-serif;
 
-    font-size: 11px;
+    font-size: 12px;
 
     color:
         rgba(
@@ -905,9 +905,9 @@ body.carta-aberta {
 
     font-size:
         clamp(
-            14px,
-            2vh,
-            17px
+            15px,
+            2.15vh,
+            18px
         );
 
     line-height: 1.45;
@@ -933,9 +933,9 @@ body.carta-aberta {
 
     font-size:
         clamp(
-            20px,
-            3vh,
-            25px
+            22px,
+            3.2vh,
+            27px
         );
 
     font-style: italic;
@@ -957,9 +957,9 @@ body.carta-aberta {
 
     font-size:
         clamp(
-            17px,
-            2.4vh,
-            20px
+            18px,
+            2.6vh,
+            21px
         );
 
     font-style: italic;
@@ -1005,9 +1005,9 @@ body.carta-aberta {
 
     font-size:
         clamp(
-            12px,
-            1.7vh,
-            15px
+            13px,
+            1.9vh,
+            16px
         );
 
     font-style: italic;
@@ -1019,9 +1019,9 @@ body.carta-aberta {
 
     font-size:
         clamp(
-            16px,
-            2.3vh,
-            20px
+            18px,
+            2.5vh,
+            21px
         );
 
     font-weight: normal;
@@ -1147,11 +1147,6 @@ body.carta-aberta {
 
 }
 
-
-
-/* ===================================================
-   TOCANDO
-=================================================== */
 
 .equalizador.tocando
 .barra {
@@ -1527,7 +1522,7 @@ body.carta-aberta {
 
     margin-bottom: 16px;
 
-    font-size: 17px;
+    font-size: 18px;
 
     line-height: 1.60;
 
@@ -1543,9 +1538,9 @@ body.carta-aberta {
 
     font-size:
         clamp(
-            25px,
+            27px,
             7vw,
-            34px
+            36px
         );
 
     color: #8a4e2c;
@@ -1595,7 +1590,7 @@ body.carta-aberta {
 
 .carta-assinatura strong {
 
-    font-size: 21px;
+    font-size: 22px;
 
     font-weight: normal;
 
@@ -1640,7 +1635,7 @@ body.carta-aberta {
         Arial,
         sans-serif;
 
-    font-size: 12px;
+    font-size: 13px;
 
     font-weight: bold;
 
@@ -1730,9 +1725,23 @@ body.carta-aberta {
     }
 
 
+    .cabecalho .feliz {
+
+        font-size: 14px;
+
+    }
+
+
     .cabecalho h1 {
 
-        font-size: 34px;
+        font-size: 35px;
+
+    }
+
+
+    .cabecalho h2 {
+
+        font-size: 19px;
 
     }
 
@@ -1752,7 +1761,7 @@ body.carta-aberta {
 
     .mensagem-inicial p {
 
-        font-size: 13px;
+        font-size: 14px;
 
         line-height: 1.25;
 
@@ -1763,30 +1772,30 @@ body.carta-aberta {
 
     .separador {
 
-        margin-bottom: 7px;
+        margin-bottom: 6px;
 
     }
 
 
     .texto-homenagem {
 
-        font-size: 13px;
+        font-size: 14px;
 
-        line-height: 1.28;
+        line-height: 1.27;
 
     }
 
 
     .texto-homenagem p {
 
-        margin-bottom: 5px;
+        margin-bottom: 4px;
 
     }
 
 
     .texto-homenagem p:first-child {
 
-        font-size: 18px;
+        font-size: 20px;
 
     }
 
@@ -1794,10 +1803,10 @@ body.carta-aberta {
     .texto-homenagem .destaque {
 
         margin:
-            6px
+            5px
             0;
 
-        font-size: 16px;
+        font-size: 17px;
 
     }
 
@@ -1805,25 +1814,32 @@ body.carta-aberta {
     .assinatura {
 
         margin:
-            5px
+            4px
             0
-            6px;
+            5px;
+
+    }
+
+
+    .assinatura span {
+
+        font-size: 12px;
 
     }
 
 
     .assinatura strong {
 
-        font-size: 16px;
+        font-size: 17px;
 
     }
 
 
     .equalizador {
 
-        height: 38px;
+        height: 36px;
 
-        margin-bottom: 7px;
+        margin-bottom: 6px;
 
     }
 
@@ -1859,14 +1875,14 @@ body.carta-aberta {
 
     .cabecalho h1 {
 
-        font-size: 27px;
+        font-size: 28px;
 
     }
 
 
     .cabecalho h2 {
 
-        font-size: 16px;
+        font-size: 17px;
 
     }
 
@@ -1886,30 +1902,30 @@ body.carta-aberta {
 
     .mensagem-inicial p {
 
-        font-size: 11px;
+        font-size: 12px;
 
     }
 
 
     .texto-homenagem {
 
-        font-size: 11.5px;
+        font-size: 12px;
 
-        line-height: 1.20;
+        line-height: 1.18;
 
     }
 
 
     .texto-homenagem p {
 
-        margin-bottom: 3px;
+        margin-bottom: 2px;
 
     }
 
 
     .texto-homenagem p:first-child {
 
-        font-size: 16px;
+        font-size: 17px;
 
     }
 
@@ -1917,10 +1933,10 @@ body.carta-aberta {
     .texto-homenagem .destaque {
 
         margin:
-            4px
+            3px
             0;
 
-        font-size: 14px;
+        font-size: 15px;
 
     }
 
@@ -1930,7 +1946,7 @@ body.carta-aberta {
         margin:
             3px
             0
-            4px;
+            3px;
 
     }
 
@@ -1944,7 +1960,7 @@ body.carta-aberta {
 
     .assinatura strong {
 
-        font-size: 13px;
+        font-size: 14px;
 
     }
 
@@ -1953,7 +1969,7 @@ body.carta-aberta {
 
         width: 170px;
 
-        height: 32px;
+        height: 30px;
 
         gap: 2px;
 
@@ -2002,7 +2018,7 @@ body.carta-aberta {
 
     .cabecalho h1 {
 
-        font-size: 30px;
+        font-size: 31px;
 
     }
 
