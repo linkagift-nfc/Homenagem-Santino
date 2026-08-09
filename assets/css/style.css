@@ -18,13 +18,11 @@
 }
 
 
-
 html {
 
     scroll-behavior: smooth;
 
 }
-
 
 
 body {
@@ -59,11 +57,6 @@ body {
 }
 
 
-
-/* ===================================================
-   QUANDO A CARTA ESTIVER ABERTA
-=================================================== */
-
 body.carta-aberta {
 
     overflow: hidden;
@@ -84,15 +77,15 @@ body.carta-aberta {
 
     max-width: 520px;
 
+    margin: 0 auto;
+
     min-height: 100vh;
     min-height: 100dvh;
-
-    margin: 0 auto;
 
     padding:
         0
         22px
-        50px;
+        40px;
 
     text-align: center;
 
@@ -103,7 +96,7 @@ body.carta-aberta {
 
 
 /* ===================================================
-   EFEITO DE LUZ DE FUNDO
+   LUZ DE FUNDO
 =================================================== */
 
 .homenagem::before {
@@ -114,37 +107,37 @@ body.carta-aberta {
 
     z-index: 0;
 
-    top: 100px;
+    top: 90px;
 
     left: 50%;
 
-    width: 350px;
-    height: 350px;
+    width: 360px;
+    height: 360px;
 
     transform:
         translateX(-50%);
 
+    border-radius: 50%;
+
     background:
         radial-gradient(
             circle,
-            rgba(255, 190, 92, 0.15),
+            rgba(255, 190, 92, 0.17),
             rgba(255, 190, 92, 0.04) 45%,
             transparent 72%
         );
 
-    border-radius: 50%;
-
-    pointer-events: none;
-
     filter:
         blur(10px);
+
+    pointer-events: none;
 
 }
 
 
 
 /* ===================================================
-   PARTÍCULAS DOURADAS
+   PARTÍCULAS
 =================================================== */
 
 .particulas {
@@ -153,18 +146,13 @@ body.carta-aberta {
 
     z-index: 1;
 
-    top: 0;
-    left: 0;
-
-    width: 100%;
-    height: 100%;
+    inset: 0;
 
     overflow: hidden;
 
     pointer-events: none;
 
 }
-
 
 
 .particula {
@@ -201,11 +189,6 @@ body.carta-aberta {
 
 }
 
-
-
-/* ===================================================
-   MOVIMENTO DA POEIRA
-=================================================== */
 
 @keyframes poeiraDourada {
 
@@ -282,12 +265,12 @@ body.carta-aberta {
 
     padding:
         max(
-            12px,
+            10px,
             env(safe-area-inset-top)
         )
         0
         max(
-            12px,
+            10px,
             env(safe-area-inset-bottom)
         );
 
@@ -306,7 +289,7 @@ body.carta-aberta {
 
 
 /* ===================================================
-   DECORAÇÕES
+   DECORAÇÃO
 =================================================== */
 
 .decoracao {
@@ -317,10 +300,7 @@ body.carta-aberta {
 
     color: #c99853;
 
-    opacity: 0.9;
-
 }
-
 
 
 .decoracao-topo {
@@ -333,38 +313,21 @@ body.carta-aberta {
 
     gap: 12px;
 
-    margin-bottom:
-        clamp(
-            3px,
-            0.8vh,
-            8px
-        );
+    margin-bottom: 5px;
 
 }
-
 
 
 .decoracao-topo .estrela {
 
-    font-size:
-        clamp(
-            13px,
-            2.2vh,
-            18px
-        );
+    font-size: 17px;
 
 }
 
 
-
 .decoracao-topo .pequena {
 
-    font-size:
-        clamp(
-            8px,
-            1.4vh,
-            11px
-        );
+    font-size: 10px;
 
     opacity: 0.65;
 
@@ -382,27 +345,22 @@ body.carta-aberta {
 
     z-index: 3;
 
-    margin-top: 0;
-
     margin-bottom:
         clamp(
             8px,
-            1.8vh,
-            18px
+            1.7vh,
+            16px
         );
 
 }
 
 
-
 .cabecalho .feliz {
-
-    margin-bottom: 1px;
 
     font-size:
         clamp(
             14px,
-            2.1vh,
+            2vh,
             18px
         );
 
@@ -415,13 +373,12 @@ body.carta-aberta {
 }
 
 
-
 .cabecalho h1 {
 
     font-size:
         clamp(
             29px,
-            8.8vw,
+            8.7vw,
             43px
         );
 
@@ -431,27 +388,12 @@ body.carta-aberta {
 
     color: #f3d3a0;
 
-    text-shadow:
-        0 2px 10px
-        rgba(
-            0,
-            0,
-            0,
-            0.40
-        );
-
 }
-
 
 
 .cabecalho h2 {
 
-    margin-top:
-        clamp(
-            4px,
-            0.8vh,
-            8px
-        );
+    margin-top: 5px;
 
     font-size:
         clamp(
@@ -467,12 +409,9 @@ body.carta-aberta {
 }
 
 
-
 .coracao {
 
     display: inline-block;
-
-    margin-left: 4px;
 
     color: #d59a62;
 
@@ -500,17 +439,14 @@ body.carta-aberta {
 
     justify-content: center;
 
-    flex-shrink: 1;
-
     margin-bottom:
         clamp(
-            9px,
-            1.8vh,
-            18px
+            8px,
+            1.7vh,
+            16px
         );
 
 }
-
 
 
 .moldura-externa {
@@ -525,7 +461,7 @@ body.carta-aberta {
 
     max-height:
         min(
-            42vh,
+            41vh,
             340px
         );
 
@@ -558,7 +494,6 @@ body.carta-aberta {
 }
 
 
-
 .moldura-externa::before {
 
     content: "";
@@ -583,7 +518,6 @@ body.carta-aberta {
 }
 
 
-
 .moldura-interna {
 
     width: 100%;
@@ -597,17 +531,7 @@ body.carta-aberta {
 
     background: #24150d;
 
-    box-shadow:
-        inset 0 0 12px
-        rgba(
-            0,
-            0,
-            0,
-            0.70
-        );
-
 }
-
 
 
 .foto-pai {
@@ -622,21 +546,6 @@ body.carta-aberta {
     object-position: center;
 
     border-radius: 13px;
-
-    transition:
-        transform
-        1.8s
-        ease;
-
-}
-
-
-
-.moldura-externa:hover
-.foto-pai {
-
-    transform:
-        scale(1.02);
 
 }
 
@@ -657,14 +566,13 @@ body.carta-aberta {
 }
 
 
-
 @keyframes brilhoFoto {
 
     0% {
 
         box-shadow:
-            0 18px 38px rgba(0, 0, 0, 0.48),
-            0 0 25px rgba(205, 145, 61, 0.12);
+            0 18px 38px rgba(0,0,0,.48),
+            0 0 25px rgba(205,145,61,.12);
 
     }
 
@@ -672,8 +580,8 @@ body.carta-aberta {
     45% {
 
         box-shadow:
-            0 18px 38px rgba(0, 0, 0, 0.48),
-            0 0 48px rgba(231, 177, 94, 0.48);
+            0 18px 38px rgba(0,0,0,.48),
+            0 0 50px rgba(231,177,94,.55);
 
     }
 
@@ -681,8 +589,8 @@ body.carta-aberta {
     100% {
 
         box-shadow:
-            0 18px 38px rgba(0, 0, 0, 0.48),
-            0 0 25px rgba(205, 145, 61, 0.12);
+            0 18px 38px rgba(0,0,0,.48),
+            0 0 25px rgba(205,145,61,.12);
 
     }
 
@@ -705,9 +613,9 @@ body.carta-aberta {
     margin:
         0 auto
         clamp(
-            9px,
-            1.7vh,
-            18px
+            8px,
+            1.5vh,
+            15px
         );
 
     color: #ead8bd;
@@ -715,19 +623,13 @@ body.carta-aberta {
 }
 
 
-
 .mensagem-inicial p {
 
-    margin-bottom:
-        clamp(
-            3px,
-            0.7vh,
-            8px
-        );
+    margin-bottom: 4px;
 
     font-size:
         clamp(
-            14px,
+            13px,
             2vh,
             17px
         );
@@ -735,15 +637,6 @@ body.carta-aberta {
     line-height: 1.4;
 
 }
-
-
-
-.mensagem-inicial p:last-child {
-
-    margin-bottom: 0;
-
-}
-
 
 
 .mensagem-inicial strong {
@@ -770,15 +663,9 @@ body.carta-aberta {
 
     align-items: center;
 
-    gap:
-        clamp(
-            4px,
-            0.8vh,
-            9px
-        );
+    gap: 6px;
 
 }
-
 
 
 .btn-abrir {
@@ -797,19 +684,10 @@ body.carta-aberta {
             330px
         );
 
-    min-height:
-        clamp(
-            48px,
-            6.8vh,
-            58px
-        );
+    min-height: 50px;
 
     padding:
-        clamp(
-            11px,
-            1.7vh,
-            15px
-        )
+        12px
         22px;
 
     border:
@@ -827,12 +705,7 @@ body.carta-aberta {
         Arial,
         sans-serif;
 
-    font-size:
-        clamp(
-            12px,
-            1.8vh,
-            14px
-        );
+    font-size: 13px;
 
     font-weight: bold;
 
@@ -843,36 +716,13 @@ body.carta-aberta {
     background:
         linear-gradient(
             180deg,
-            rgba(112, 72, 32, 0.65),
-            rgba(62, 37, 19, 0.90)
+            rgba(112,72,32,.65),
+            rgba(62,37,19,.90)
         );
-
-    box-shadow:
-        0 9px 20px rgba(0, 0, 0, 0.34),
-        inset 0 1px 0 rgba(255, 255, 255, 0.10);
 
     cursor: pointer;
 
-    transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-
 }
-
-
-
-.btn-abrir:hover {
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(140, 88, 37, 0.80),
-            rgba(72, 43, 22, 0.95)
-        );
-
-}
-
 
 
 .btn-abrir:active {
@@ -883,37 +733,13 @@ body.carta-aberta {
 }
 
 
-
-.btn-abrir:disabled {
-
-    cursor: default;
-
-    opacity: 0.82;
-
-}
-
-
-
-.icone-play {
-
-    color: #dfb66d;
-
-}
-
-
-
 .instrucao {
 
     font-family:
         Arial,
         sans-serif;
 
-    font-size:
-        clamp(
-            10px,
-            1.5vh,
-            12px
-        );
+    font-size: 11px;
 
     color:
         rgba(
@@ -928,7 +754,7 @@ body.carta-aberta {
 
 
 /* ===================================================
-   HOMENAGEM COMPLETA
+   SEGUNDA TELA
 =================================================== */
 
 .conteudo-homenagem {
@@ -937,9 +763,11 @@ body.carta-aberta {
 
     z-index: 3;
 
-    max-height: 0;
+    width: 100%;
 
-    margin-top: 0;
+    height: 0;
+
+    min-height: 0;
 
     overflow: hidden;
 
@@ -949,25 +777,62 @@ body.carta-aberta {
         translateY(20px);
 
     transition:
-        max-height 1.8s ease,
         opacity 1s ease,
-        transform 1s ease,
-        margin-top 1s ease;
+        transform 1s ease;
 
 }
 
 
 
+/* ===================================================
+   SEGUNDA TELA ATIVA
+=================================================== */
+
 .conteudo-homenagem.ativo {
 
-    max-height: 1900px;
+    height: 100vh;
+    height: 100dvh;
 
-    margin-top: 40px;
+    min-height: 100vh;
+    min-height: 100dvh;
 
     opacity: 1;
 
     transform:
         translateY(0);
+
+}
+
+
+
+/* ===================================================
+   CONTEÚDO INTERNO
+=================================================== */
+
+.conteudo-homenagem-interno {
+
+    width: 100%;
+
+    height: 100%;
+
+    padding:
+        max(
+            12px,
+            env(safe-area-inset-top)
+        )
+        0
+        max(
+            12px,
+            env(safe-area-inset-bottom)
+        );
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
 
 }
 
@@ -985,17 +850,21 @@ body.carta-aberta {
 
     align-items: center;
 
-    gap: 12px;
+    gap: 10px;
 
-    margin-bottom: 30px;
+    margin-bottom:
+        clamp(
+            10px,
+            1.8vh,
+            20px
+        );
 
 }
 
 
-
 .separador span {
 
-    width: 76px;
+    width: 65px;
 
     height: 1px;
 
@@ -1007,7 +876,6 @@ body.carta-aberta {
         );
 
 }
-
 
 
 .separador span:last-child {
@@ -1022,7 +890,6 @@ body.carta-aberta {
 }
 
 
-
 .separador strong {
 
     color: #c99157;
@@ -1032,7 +899,7 @@ body.carta-aberta {
 
 
 /* ===================================================
-   TEXTO
+   TEXTO HOMENAGEM
 =================================================== */
 
 .texto-homenagem {
@@ -1043,29 +910,47 @@ body.carta-aberta {
 
     padding:
         0
-        8px;
+        6px;
 
-    font-size: 17px;
+    font-size:
+        clamp(
+            14px,
+            2vh,
+            17px
+        );
 
-    line-height: 1.75;
+    line-height:
+        clamp(
+            1.35,
+            1.55,
+            1.7
+        );
 
     color: #ead8bd;
 
 }
 
 
-
 .texto-homenagem p {
 
-    margin-bottom: 20px;
+    margin-bottom:
+        clamp(
+            8px,
+            1.5vh,
+            16px
+        );
 
 }
 
 
-
 .texto-homenagem p:first-child {
 
-    font-size: 25px;
+    font-size:
+        clamp(
+            21px,
+            3vh,
+            25px
+        );
 
     font-style: italic;
 
@@ -1074,14 +959,28 @@ body.carta-aberta {
 }
 
 
-
 .texto-homenagem .destaque {
 
-    margin-top: 28px;
+    margin-top:
+        clamp(
+            10px,
+            1.5vh,
+            20px
+        );
 
-    margin-bottom: 28px;
+    margin-bottom:
+        clamp(
+            10px,
+            1.5vh,
+            20px
+        );
 
-    font-size: 20px;
+    font-size:
+        clamp(
+            17px,
+            2.5vh,
+            20px
+        );
 
     font-style: italic;
 
@@ -1101,31 +1000,49 @@ body.carta-aberta {
 
     flex-direction: column;
 
-    gap: 5px;
+    gap: 3px;
 
-    margin-top: 32px;
+    margin-top:
+        clamp(
+            7px,
+            1.3vh,
+            16px
+        );
 
-    margin-bottom: 24px;
+    margin-bottom:
+        clamp(
+            8px,
+            1.5vh,
+            18px
+        );
 
     color: #d9bb8c;
 
 }
 
 
-
 .assinatura span {
 
-    font-size: 15px;
+    font-size:
+        clamp(
+            13px,
+            1.7vh,
+            15px
+        );
 
     font-style: italic;
 
 }
 
 
-
 .assinatura strong {
 
-    font-size: 20px;
+    font-size:
+        clamp(
+            17px,
+            2.4vh,
+            20px
+        );
 
     font-weight: normal;
 
@@ -1136,14 +1053,12 @@ body.carta-aberta {
 
 
 /* ===================================================
-   EQUALIZADOR
+   EQUALIZADOR IMPACTANTE
 =================================================== */
 
 .equalizador {
 
     position: relative;
-
-    z-index: 4;
 
     display: flex;
 
@@ -1151,16 +1066,25 @@ body.carta-aberta {
 
     justify-content: center;
 
-    gap: 5px;
+    gap: 4px;
 
-    width: 110px;
+    width: 170px;
 
-    height: 50px;
+    height:
+        clamp(
+            48px,
+            7vh,
+            68px
+        );
 
     margin:
         0
         auto
-        16px;
+        clamp(
+            7px,
+            1.3vh,
+            13px
+        );
 
     padding-bottom: 4px;
 
@@ -1168,7 +1092,55 @@ body.carta-aberta {
 
 
 
-/* LINHA BASE */
+/* ===================================================
+   BRILHO ATRÁS DO EQUALIZADOR
+=================================================== */
+
+.equalizador::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+
+    bottom: 0;
+
+    width: 140px;
+    height: 55px;
+
+    transform:
+        translateX(-50%);
+
+    background:
+        radial-gradient(
+            ellipse,
+            rgba(233, 179, 93, 0.18),
+            transparent 70%
+        );
+
+    filter:
+        blur(6px);
+
+    opacity: 0.40;
+
+    transition:
+        opacity 0.3s ease;
+
+}
+
+
+.equalizador.tocando::before {
+
+    opacity: 1;
+
+}
+
+
+
+/* ===================================================
+   LINHA INFERIOR
+=================================================== */
 
 .equalizador::after {
 
@@ -1176,8 +1148,8 @@ body.carta-aberta {
 
     position: absolute;
 
-    left: 8px;
-    right: 8px;
+    left: 10px;
+    right: 10px;
 
     bottom: 0;
 
@@ -1187,7 +1159,7 @@ body.carta-aberta {
         linear-gradient(
             90deg,
             transparent,
-            rgba(219, 170, 92, 0.42),
+            rgba(255, 215, 142, 0.75),
             transparent
         );
 
@@ -1195,17 +1167,23 @@ body.carta-aberta {
 
 
 
-/* BARRAS */
+/* ===================================================
+   BARRAS
+=================================================== */
 
 .equalizador .barra {
 
+    position: relative;
+
+    z-index: 2;
+
     display: block;
 
-    width: 7px;
-
-    height: 5px;
+    width: 8px;
 
     min-height: 5px;
+
+    height: 5px;
 
     border-radius:
         7px
@@ -1216,34 +1194,32 @@ body.carta-aberta {
     background:
         linear-gradient(
             180deg,
-            #ffe9ad 0%,
-            #dfae5c 45%,
-            #9f6229 100%
+            #fff2ba 0%,
+            #ffd27d 24%,
+            #dca14d 58%,
+            #88511f 100%
         );
 
     box-shadow:
-        0 0 8px
-        rgba(
-            231,
-            179,
-            93,
-            0.24
-        );
+        0 0 5px rgba(255, 218, 142, 0.30),
+        0 0 12px rgba(231, 179, 93, 0.18);
 
-    opacity: 0.52;
+    opacity: 0.55;
 
     transform-origin: bottom;
 
     transition:
-        height 0.08s linear,
-        opacity 0.3s ease,
-        box-shadow 0.3s ease;
+        height 0.055s linear,
+        opacity 0.20s ease,
+        box-shadow 0.20s ease;
 
 }
 
 
 
-/* EQUALIZADOR TOCANDO */
+/* ===================================================
+   BARRAS QUANDO TOCANDO
+=================================================== */
 
 .equalizador.tocando
 .barra {
@@ -1251,20 +1227,30 @@ body.carta-aberta {
     opacity: 1;
 
     box-shadow:
-        0 0 10px
-        rgba(
-            231,
-            179,
-            93,
-            0.50
-        );
+        0 0 6px rgba(255, 231, 177, 0.70),
+        0 0 14px rgba(235, 179, 83, 0.55),
+        0 0 24px rgba(190, 119, 39, 0.26);
 
 }
 
 
 
 /* ===================================================
-   BOTÃO DA MÚSICA
+   BARRAS CENTRAIS MAIS LARGAS
+=================================================== */
+
+.equalizador .barra:nth-child(5),
+.equalizador .barra:nth-child(6),
+.equalizador .barra:nth-child(7) {
+
+    width: 9px;
+
+}
+
+
+
+/* ===================================================
+   BOTÃO MÚSICA
 =================================================== */
 
 .btn-musica {
@@ -1275,9 +1261,19 @@ body.carta-aberta {
 
     justify-content: center;
 
-    width: 52px;
+    width:
+        clamp(
+            46px,
+            6.5vh,
+            54px
+        );
 
-    height: 52px;
+    height:
+        clamp(
+            46px,
+            6.5vh,
+            54px
+        );
 
     margin:
         0
@@ -1289,12 +1285,12 @@ body.carta-aberta {
             220,
             168,
             86,
-            0.65
+            0.70
         );
 
     border-radius: 50%;
 
-    font-size: 22px;
+    font-size: 21px;
 
     color: #f2d09b;
 
@@ -1303,40 +1299,16 @@ body.carta-aberta {
             69,
             42,
             22,
-            0.75
+            0.78
         );
 
     box-shadow:
-        0 6px 18px
-        rgba(
-            0,
-            0,
-            0,
-            0.35
-        );
+        0 6px 18px rgba(0,0,0,.35),
+        0 0 16px rgba(223, 164, 75, 0.10);
 
     cursor: pointer;
 
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
-
 }
-
-
-
-.btn-musica:hover {
-
-    background:
-        rgba(
-            101,
-            61,
-            29,
-            0.88
-        );
-
-}
-
 
 
 .btn-musica:active {
@@ -1366,7 +1338,7 @@ body.carta-aberta {
 
     gap: 15px;
 
-    margin-top: 44px;
+    margin-top: 24px;
 
     font-size: 12px;
 
@@ -1377,7 +1349,7 @@ body.carta-aberta {
 
 
 /* ===================================================
-   CARTA FINAL - FUNDO
+   CARTA
 =================================================== */
 
 .carta-overlay {
@@ -1395,8 +1367,13 @@ body.carta-aberta {
     justify-content: center;
 
     padding:
-        24px
         20px;
+
+    visibility: hidden;
+
+    opacity: 0;
+
+    pointer-events: none;
 
     background:
         rgba(
@@ -1412,25 +1389,13 @@ body.carta-aberta {
     -webkit-backdrop-filter:
         blur(0);
 
-    visibility: hidden;
-
-    opacity: 0;
-
-    pointer-events: none;
-
     transition:
         opacity 0.7s ease,
         background 0.7s ease,
-        backdrop-filter 0.7s ease,
-        visibility 0.7s;
+        backdrop-filter 0.7s ease;
 
 }
 
-
-
-/* ===================================================
-   CARTA ABERTA
-=================================================== */
 
 .carta-overlay.ativa {
 
@@ -1445,7 +1410,7 @@ body.carta-aberta {
             10,
             6,
             4,
-            0.80
+            0.82
         );
 
     backdrop-filter:
@@ -1459,7 +1424,7 @@ body.carta-aberta {
 
 
 /* ===================================================
-   PAPEL DA CARTA
+   CARTA PAPEL
 =================================================== */
 
 .carta-final {
@@ -1474,15 +1439,15 @@ body.carta-aberta {
 
     max-height:
         calc(
-            100dvh - 48px
+            100dvh - 40px
         );
 
     overflow-y: auto;
 
     padding:
-        36px
-        28px
-        30px;
+        34px
+        26px
+        28px;
 
     color: #53361e;
 
@@ -1507,15 +1472,6 @@ body.carta-aberta {
             0,
             0,
             0.55
-        ),
-        inset
-        0 0 0
-        4px
-        rgba(
-            255,
-            255,
-            255,
-            0.35
         );
 
     text-align: center;
@@ -1524,24 +1480,26 @@ body.carta-aberta {
 
     transform:
         translateY(35px)
-        scale(0.90)
-        rotateX(8deg);
+        scale(0.90);
 
     transition:
         opacity 0.8s ease,
-        transform 0.9s
-        cubic-bezier(
-            0.20,
-            0.85,
-            0.25,
-            1.10
-        );
+        transform 0.9s ease;
 
 }
 
 
+.carta-overlay.ativa
+.carta-final {
 
-/* BORDA INTERNA */
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
 
 .carta-final::before {
 
@@ -1560,64 +1518,14 @@ body.carta-aberta {
             0.34
         );
 
-    border-radius: 4px;
-
     pointer-events: none;
 
 }
 
 
 
-/* TEXTURA SUAVE */
-
-.carta-final::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    opacity: 0.20;
-
-    background:
-        radial-gradient(
-            circle at 20% 15%,
-            rgba(255, 255, 255, 0.9),
-            transparent 22%
-        ),
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(175, 119, 52, 0.18),
-            transparent 28%
-        );
-
-}
-
-
-
 /* ===================================================
-   ANIMAÇÃO DA CARTA
-=================================================== */
-
-.carta-overlay.ativa
-.carta-final {
-
-    opacity: 1;
-
-    transform:
-        translateY(0)
-        scale(1)
-        rotateX(0);
-
-}
-
-
-
-/* ===================================================
-   ENFEITE DA CARTA
+   CARTA ENFEITES
 =================================================== */
 
 .carta-enfeite {
@@ -1628,18 +1536,17 @@ body.carta-aberta {
 
     display: flex;
 
-    align-items: center;
-
     justify-content: center;
+
+    align-items: center;
 
     gap: 10px;
 
-    margin-bottom: 24px;
+    margin-bottom: 22px;
 
     color: #b27c36;
 
 }
-
 
 
 .carta-enfeite span {
@@ -1658,7 +1565,6 @@ body.carta-aberta {
 }
 
 
-
 .carta-enfeite span:last-child {
 
     background:
@@ -1672,24 +1578,14 @@ body.carta-aberta {
 
 
 
-.carta-enfeite strong {
-
-    font-size: 18px;
-
-    color: #b86f4a;
-
-}
-
-
-
 /* ===================================================
-   CONTEÚDO DA CARTA
+   CARTA TEXTO
 =================================================== */
 
 .carta-final p,
 .carta-final h2,
 .carta-final button,
-.carta-final .carta-separador {
+.carta-separador {
 
     position: relative;
 
@@ -1698,12 +1594,11 @@ body.carta-aberta {
 }
 
 
-
 .carta-pai {
 
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 
-    font-size: 27px;
+    font-size: 27px !important;
 
     font-style: italic;
 
@@ -1712,25 +1607,23 @@ body.carta-aberta {
 }
 
 
-
 .carta-final p {
 
-    margin-bottom: 18px;
+    margin-bottom: 16px;
 
     font-size: 17px;
 
-    line-height: 1.65;
+    line-height: 1.60;
 
 }
-
 
 
 .carta-final h2 {
 
     margin:
-        26px
+        24px
         0
-        20px;
+        18px;
 
     font-size:
         clamp(
@@ -1739,23 +1632,9 @@ body.carta-aberta {
             34px
         );
 
-    line-height: 1.15;
-
-    letter-spacing: 1px;
-
     color: #8a4e2c;
 
-    text-shadow:
-        0 1px 0
-        rgba(
-            255,
-            255,
-            255,
-            0.65
-        );
-
 }
-
 
 
 .carta-final h2 span {
@@ -1763,8 +1642,6 @@ body.carta-aberta {
     display: block;
 
     margin-top: 10px;
-
-    font-size: 27px;
 
     animation:
         pulsarCarta
@@ -1775,18 +1652,16 @@ body.carta-aberta {
 }
 
 
-
 .carta-separador {
 
     margin:
         10px
         0
-        20px;
+        18px;
 
     color: #b9894c;
 
 }
-
 
 
 .carta-assinatura {
@@ -1802,7 +1677,6 @@ body.carta-aberta {
 }
 
 
-
 .carta-assinatura strong {
 
     font-size: 21px;
@@ -1816,7 +1690,7 @@ body.carta-aberta {
 
 
 /* ===================================================
-   BOTÃO FECHAR CARTA
+   BOTÃO CARTA
 =================================================== */
 
 .btn-fechar-carta {
@@ -1854,8 +1728,6 @@ body.carta-aberta {
 
     font-weight: bold;
 
-    letter-spacing: 0.6px;
-
     color: #6d4528;
 
     background:
@@ -1867,33 +1739,6 @@ body.carta-aberta {
         );
 
     cursor: pointer;
-
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
-
-}
-
-
-
-.btn-fechar-carta:hover {
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.90
-        );
-
-}
-
-
-
-.btn-fechar-carta:active {
-
-    transform:
-        scale(0.96);
 
 }
 
@@ -1924,7 +1769,6 @@ body.carta-aberta {
 }
 
 
-
 @keyframes pulsarCarta {
 
     0%,
@@ -1948,21 +1792,12 @@ body.carta-aberta {
 
 
 /* ===================================================
-   CELULARES MAIS BAIXOS
+   CELULARES ATÉ 700px DE ALTURA
 =================================================== */
 
 @media (
     max-height: 700px
 ) {
-
-
-    .tela-inicial {
-
-        padding-top: 8px;
-
-        padding-bottom: 8px;
-
-    }
 
 
     .decoracao-topo {
@@ -1974,7 +1809,7 @@ body.carta-aberta {
 
     .cabecalho {
 
-        margin-bottom: 7px;
+        margin-bottom: 6px;
 
     }
 
@@ -1988,21 +1823,14 @@ body.carta-aberta {
 
     .cabecalho h1 {
 
-        font-size:
-            clamp(
-                27px,
-                8vw,
-                36px
-            );
+        font-size: 34px;
 
     }
 
 
     .cabecalho h2 {
 
-        margin-top: 3px;
-
-        font-size: 19px;
+        font-size: 18px;
 
     }
 
@@ -2011,58 +1839,125 @@ body.carta-aberta {
 
         width:
             min(
-                52vw,
-                215px
+                51vw,
+                205px
             );
 
-        max-height: 34vh;
-
-        padding: 6px;
-
-    }
-
-
-    .area-foto {
-
-        margin-bottom: 8px;
+        max-height: 32vh;
 
     }
 
 
     .mensagem-inicial {
 
-        margin-bottom: 8px;
+        margin-bottom: 7px;
 
     }
 
 
     .mensagem-inicial p {
 
-        margin-bottom: 3px;
-
         font-size: 13px;
 
-        line-height: 1.3;
+        line-height: 1.25;
 
     }
 
 
     .btn-abrir {
 
-        min-height: 45px;
+        min-height: 43px;
 
         padding:
-            10px
-            20px;
+            9px
+            18px;
+
+    }
+
+
+
+    /* SEGUNDA TELA */
+
+    .separador {
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .texto-homenagem {
+
+        font-size: 13px;
+
+        line-height: 1.32;
+
+    }
+
+
+    .texto-homenagem p {
+
+        margin-bottom: 6px;
+
+    }
+
+
+    .texto-homenagem p:first-child {
+
+        font-size: 19px;
+
+    }
+
+
+    .texto-homenagem .destaque {
+
+        margin:
+            7px
+            0;
+
+        font-size: 16px;
+
+    }
+
+
+    .assinatura {
+
+        margin-top: 6px;
+
+        margin-bottom: 7px;
+
+    }
+
+
+    .assinatura span {
 
         font-size: 12px;
 
     }
 
 
-    .instrucao {
+    .assinatura strong {
 
-        font-size: 10px;
+        font-size: 16px;
+
+    }
+
+
+    .equalizador {
+
+        height: 46px;
+
+        margin-bottom: 7px;
+
+    }
+
+
+    .btn-musica {
+
+        width: 44px;
+
+        height: 44px;
+
+        font-size: 18px;
 
     }
 
@@ -2088,30 +1983,28 @@ body.carta-aberta {
 
     .cabecalho {
 
-        margin-bottom: 5px;
+        margin-bottom: 4px;
 
     }
 
 
     .cabecalho .feliz {
 
-        font-size: 12px;
+        font-size: 11px;
 
     }
 
 
     .cabecalho h1 {
 
-        font-size: 28px;
+        font-size: 27px;
 
     }
 
 
     .cabecalho h2 {
 
-        margin-top: 2px;
-
-        font-size: 17px;
+        font-size: 16px;
 
     }
 
@@ -2120,45 +2013,18 @@ body.carta-aberta {
 
         width:
             min(
-                45vw,
-                175px
+                44vw,
+                165px
             );
 
-        max-height: 30vh;
-
-    }
-
-
-    .area-foto {
-
-        margin-bottom: 6px;
-
-    }
-
-
-    .mensagem-inicial {
-
-        margin-bottom: 6px;
+        max-height: 28vh;
 
     }
 
 
     .mensagem-inicial p {
 
-        font-size: 12px;
-
-        line-height: 1.25;
-
-    }
-
-
-    .btn-abrir {
-
-        min-height: 42px;
-
-        padding:
-            8px
-            18px;
+        font-size: 11px;
 
     }
 
@@ -2170,51 +2036,99 @@ body.carta-aberta {
     }
 
 
-    .carta-final {
 
-        padding:
-            26px
-            22px
-            22px;
+    /* SEGUNDA TELA */
 
-    }
+    .separador {
 
-
-    .carta-final p {
-
-        margin-bottom: 12px;
-
-        font-size: 15px;
-
-        line-height: 1.45;
+        margin-bottom: 5px;
 
     }
 
 
-    .carta-pai {
+    .texto-homenagem {
 
-        font-size: 22px !important;
+        font-size: 11.5px;
+
+        line-height: 1.22;
 
     }
 
 
-    .carta-final h2 {
+    .texto-homenagem p {
+
+        margin-bottom: 4px;
+
+    }
+
+
+    .texto-homenagem p:first-child {
+
+        font-size: 17px;
+
+    }
+
+
+    .texto-homenagem .destaque {
 
         margin:
-            18px
-            0
-            14px;
+            4px
+            0;
 
-        font-size: 24px;
+        font-size: 14px;
+
+    }
+
+
+    .assinatura {
+
+        margin:
+            4px
+            0
+            5px;
+
+    }
+
+
+    .assinatura span {
+
+        font-size: 10px;
+
+    }
+
+
+    .assinatura strong {
+
+        font-size: 14px;
 
     }
 
 
     .equalizador {
 
-        height: 42px;
+        height: 38px;
 
-        margin-bottom: 12px;
+        width: 145px;
+
+        margin-bottom: 5px;
+
+    }
+
+
+    .equalizador .barra {
+
+        width: 6px;
+
+    }
+
+
+    .btn-musica {
+
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 17px;
 
     }
 
@@ -2242,52 +2156,23 @@ body.carta-aberta {
 
     .cabecalho h1 {
 
-        font-size:
-            clamp(
-                27px,
-                9vw,
-                32px
-            );
-
-    }
-
-
-    .cabecalho h2 {
-
-        font-size: 20px;
-
-    }
-
-
-    .texto-homenagem {
-
-        font-size: 16px;
-
-    }
-
-
-    .carta-final {
-
-        padding:
-            32px
-            22px
-            26px;
+        font-size: 30px;
 
     }
 
 
     .equalizador {
 
-        width: 96px;
+        width: 155px;
 
-        gap: 4px;
+        gap: 3px;
 
     }
 
 
     .equalizador .barra {
 
-        width: 6px;
+        width: 7px;
 
     }
 
@@ -2315,8 +2200,6 @@ body.carta-aberta {
 
     .homenagem {
 
-        min-height: 100vh;
-
         box-shadow:
             0 0 80px
             rgba(
@@ -2328,20 +2211,12 @@ body.carta-aberta {
 
     }
 
-
-    .moldura-externa {
-
-        width: 270px;
-
-    }
-
 }
 
 
 
 /* ===================================================
-   REDUZIR ANIMAÇÕES
-   CASO CONFIGURADO NO APARELHO
+   ACESSIBILIDADE
 =================================================== */
 
 @media (
@@ -2356,6 +2231,5 @@ body.carta-aberta {
         animation: none;
 
     }
-
 
 }
