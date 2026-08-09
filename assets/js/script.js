@@ -9,27 +9,27 @@
 =================================================== */
 
 const btnAbrir =
-    document.getElementById(
-        "btnAbrir"
-    );
+document.getElementById(
+    "btnAbrir"
+);
 
 
 const conteudoHomenagem =
-    document.getElementById(
-        "conteudoHomenagem"
-    );
+document.getElementById(
+    "conteudoHomenagem"
+);
 
 
 const musica =
-    document.getElementById(
-        "musica"
-    );
+document.getElementById(
+    "musica"
+);
 
 
 const btnMusica =
-    document.getElementById(
-        "btnMusica"
-    );
+document.getElementById(
+    "btnMusica"
+);
 
 
 
@@ -37,9 +37,12 @@ const btnMusica =
    CONTROLE
 =================================================== */
 
-let homenagemAberta = false;
+let homenagemAberta =
+    false;
 
-let musicaTocando = false;
+
+let musicaTocando =
+    false;
 
 
 
@@ -63,11 +66,14 @@ btnAbrir.addEventListener(
         }
 
 
-        homenagemAberta = true;
+        homenagemAberta =
+            true;
 
 
 
-        /* MOSTRAR CONTEÚDO */
+        /* =========================================
+           MOSTRAR CONTEÚDO
+        ========================================== */
 
         conteudoHomenagem
             .classList
@@ -77,7 +83,9 @@ btnAbrir.addEventListener(
 
 
 
-        /* ALTERAR BOTÃO */
+        /* =========================================
+           ALTERAR BOTÃO
+        ========================================== */
 
         btnAbrir.innerHTML = `
 
@@ -92,17 +100,23 @@ btnAbrir.addEventListener(
         `;
 
 
-        btnAbrir.disabled = true;
+        btnAbrir.disabled =
+            true;
 
 
 
-        /* INICIAR MÚSICA */
+        /* =========================================
+           INICIAR MÚSICA
+        ========================================== */
 
         iniciarMusica();
 
 
 
-        /* ROLAR SUAVEMENTE */
+        /* =========================================
+           ROLAR SUAVEMENTE
+           PARA O INÍCIO DA HOMENAGEM
+        ========================================== */
 
         setTimeout(
 
@@ -137,20 +151,42 @@ btnAbrir.addEventListener(
 
 async function iniciarMusica() {
 
+
     try {
+
 
         musica.volume =
             0.65;
 
 
+
+        /* =========================================
+           SE A MÚSICA JÁ TERMINOU
+           VOLTA PARA O INÍCIO
+        ========================================== */
+
+        if (
+            musica.ended
+        ) {
+
+            musica.currentTime =
+                0;
+
+        }
+
+
+
         await musica.play();
+
 
 
         musicaTocando =
             true;
 
 
+
         atualizarBotaoMusica();
+
 
     }
 
@@ -158,9 +194,13 @@ async function iniciarMusica() {
         erro
     ) {
 
+
         console.log(
+
             "O navegador não iniciou o áudio automaticamente.",
+
             erro
+
         );
 
 
@@ -169,6 +209,7 @@ async function iniciarMusica() {
 
 
         atualizarBotaoMusica();
+
 
     }
 
@@ -182,6 +223,7 @@ async function iniciarMusica() {
 
 function pausarMusica() {
 
+
     musica.pause();
 
 
@@ -190,6 +232,7 @@ function pausarMusica() {
 
 
     atualizarBotaoMusica();
+
 
 }
 
@@ -210,13 +253,17 @@ btnMusica.addEventListener(
             musicaTocando
         ) {
 
+
             pausarMusica();
+
 
         }
 
         else {
 
+
             iniciarMusica();
+
 
         }
 
@@ -237,6 +284,7 @@ function atualizarBotaoMusica() {
         musicaTocando
     ) {
 
+
         btnMusica.innerHTML =
             "❚❚";
 
@@ -249,9 +297,11 @@ function atualizarBotaoMusica() {
 
         );
 
+
     }
 
     else {
+
 
         btnMusica.innerHTML =
             "▶";
@@ -265,6 +315,7 @@ function atualizarBotaoMusica() {
 
         );
 
+
     }
 
 }
@@ -272,7 +323,7 @@ function atualizarBotaoMusica() {
 
 
 /* ===================================================
-   EVENTOS DO ÁUDIO
+   EVENTO PLAY
 =================================================== */
 
 musica.addEventListener(
@@ -281,11 +332,13 @@ musica.addEventListener(
 
     function () {
 
+
         musicaTocando =
             true;
 
 
         atualizarBotaoMusica();
+
 
     }
 
@@ -293,17 +346,69 @@ musica.addEventListener(
 
 
 
+/* ===================================================
+   EVENTO PAUSE
+=================================================== */
+
 musica.addEventListener(
 
     "pause",
 
     function () {
 
+
         musicaTocando =
             false;
 
 
         atualizarBotaoMusica();
+
+
+    }
+
+);
+
+
+
+/* ===================================================
+   QUANDO A MÚSICA TERMINAR
+=================================================== */
+
+musica.addEventListener(
+
+    "ended",
+
+    function () {
+
+
+        /* =========================================
+           GARANTE QUE FIQUE PARADA
+        ========================================== */
+
+        musica.pause();
+
+
+
+        /* =========================================
+           VOLTA O ÁUDIO PARA O INÍCIO
+           SEM REPRODUZIR NOVAMENTE
+        ========================================== */
+
+        musica.currentTime =
+            0;
+
+
+
+        /* =========================================
+           ATUALIZA CONTROLE
+        ========================================== */
+
+        musicaTocando =
+            false;
+
+
+        atualizarBotaoMusica();
+
 
     }
 
