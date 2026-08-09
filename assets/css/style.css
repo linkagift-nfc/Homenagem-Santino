@@ -11,13 +11,10 @@
 * {
 
     margin: 0;
-
     padding: 0;
-
     box-sizing: border-box;
 
 }
-
 
 
 html {
@@ -27,13 +24,11 @@ html {
 }
 
 
-
 body {
 
     width: 100%;
 
     min-height: 100vh;
-
     min-height: 100dvh;
 
     font-family:
@@ -75,7 +70,6 @@ body {
     max-width: 520px;
 
     min-height: 100vh;
-
     min-height: 100dvh;
 
     margin: 0 auto;
@@ -95,7 +89,6 @@ body {
 
 /* ===================================================
    PRIMEIRA TELA
-   CABE NA ALTURA DO CELULAR
 =================================================== */
 
 .tela-inicial {
@@ -106,22 +99,20 @@ body {
 
     width: 100%;
 
-    min-height: 100vh;
-
     height: 100vh;
-
-    min-height: 100dvh;
-
     height: 100dvh;
+
+    min-height: 100vh;
+    min-height: 100dvh;
 
     padding:
         max(
-            14px,
+            12px,
             env(safe-area-inset-top)
         )
         0
         max(
-            14px,
+            12px,
             env(safe-area-inset-bottom)
         );
 
@@ -129,11 +120,333 @@ body {
 
     flex-direction: column;
 
-    align-items: center;
-
     justify-content: center;
 
+    align-items: center;
+
     overflow: hidden;
+
+}
+
+
+
+/* ===================================================
+   POEIRA DOURADA
+=================================================== */
+
+.particulas {
+
+    position: absolute;
+
+    inset: 0;
+
+    z-index: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    transition:
+        opacity 1.4s ease;
+
+}
+
+
+
+.particula {
+
+    position: absolute;
+
+    display: block;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffe6aa 0%,
+            #e3b866 40%,
+            rgba(202, 145, 68, 0.35) 70%,
+            transparent 100%
+        );
+
+    box-shadow:
+        0 0 6px
+        rgba(
+            235,
+            181,
+            94,
+            0.65
+        );
+
+    animation:
+        poeiraDourada
+        8s
+        ease-in-out
+        infinite;
+
+}
+
+
+
+@keyframes poeiraDourada {
+
+    0% {
+
+        transform:
+            translateY(12px)
+            translateX(0)
+            scale(0.7);
+
+        opacity: 0.15;
+
+    }
+
+
+    35% {
+
+        opacity: 0.70;
+
+    }
+
+
+    65% {
+
+        transform:
+            translateY(-18px)
+            translateX(8px)
+            scale(1.15);
+
+        opacity: 0.45;
+
+    }
+
+
+    100% {
+
+        transform:
+            translateY(-40px)
+            translateX(-5px)
+            scale(0.65);
+
+        opacity: 0.05;
+
+    }
+
+}
+
+
+
+/* ===================================================
+   FINALIZAÇÃO DAS PARTÍCULAS
+=================================================== */
+
+.particulas.finalizar {
+
+    animation:
+        brilhoFinal
+        1.5s
+        ease
+        forwards;
+
+}
+
+
+
+@keyframes brilhoFinal {
+
+    0% {
+
+        opacity: 1;
+
+        filter:
+            brightness(1);
+
+    }
+
+
+    45% {
+
+        opacity: 1;
+
+        filter:
+            brightness(2);
+
+    }
+
+
+    100% {
+
+        opacity: 0;
+
+        filter:
+            brightness(1.4);
+
+    }
+
+}
+
+
+
+/* ===================================================
+   FRASE DE FUNDO
+=================================================== */
+
+.frase-fundo {
+
+    position: absolute;
+
+    z-index: 0;
+
+    left: 50%;
+
+    bottom:
+        clamp(
+            95px,
+            13vh,
+            135px
+        );
+
+    width: 100%;
+
+    transform:
+        translateX(-50%);
+
+    font-size:
+        clamp(
+            14px,
+            3.7vw,
+            18px
+        );
+
+    font-style: italic;
+
+    letter-spacing: 1.6px;
+
+    color:
+        rgba(
+            226,
+            185,
+            112,
+            0.16
+        );
+
+    pointer-events: none;
+
+    user-select: none;
+
+    animation:
+        respirarFrase
+        4.5s
+        ease-in-out
+        infinite;
+
+}
+
+
+
+.frase-fundo span {
+
+    display: inline-block;
+
+    margin:
+        0
+        5px;
+
+    color:
+        rgba(
+            219,
+            164,
+            88,
+            0.20
+        );
+
+}
+
+
+
+@keyframes respirarFrase {
+
+    0%,
+    100% {
+
+        opacity: 0.45;
+
+        letter-spacing: 1.6px;
+
+    }
+
+
+    50% {
+
+        opacity: 0.90;
+
+        letter-spacing: 2.3px;
+
+    }
+
+}
+
+
+
+/* ===================================================
+   FRASE SUMINDO AO ABRIR
+=================================================== */
+
+.frase-fundo.sumir {
+
+    animation:
+        desaparecerFrase
+        1.5s
+        ease
+        forwards;
+
+}
+
+
+
+@keyframes desaparecerFrase {
+
+    0% {
+
+        opacity: 1;
+
+        filter:
+            blur(0);
+
+        transform:
+            translateX(-50%)
+            scale(1);
+
+    }
+
+
+    40% {
+
+        opacity: 0.75;
+
+        filter:
+            blur(1px);
+
+        transform:
+            translateX(-50%)
+            scale(1.04);
+
+    }
+
+
+    100% {
+
+        opacity: 0;
+
+        filter:
+            blur(8px);
+
+        transform:
+            translateX(-50%)
+            scale(1.12);
+
+    }
 
 }
 
@@ -150,11 +463,9 @@ body {
     position: absolute;
 
     top: 120px;
-
     left: 50%;
 
     width: 330px;
-
     height: 330px;
 
     transform:
@@ -174,6 +485,33 @@ body {
 
     filter:
         blur(10px);
+
+}
+
+
+
+/* ===================================================
+   ELEMENTOS ACIMA DAS PARTÍCULAS
+=================================================== */
+
+.tela-inicial
+.decoracao,
+
+.tela-inicial
+.cabecalho,
+
+.tela-inicial
+.area-foto,
+
+.tela-inicial
+.mensagem-inicial,
+
+.tela-inicial
+.area-botao {
+
+    position: relative;
+
+    z-index: 2;
 
 }
 
@@ -251,10 +589,6 @@ body {
 =================================================== */
 
 .cabecalho {
-
-    position: relative;
-
-    z-index: 2;
 
     margin-top: 0;
 
@@ -361,14 +695,10 @@ body {
 
 
 /* ===================================================
-   ÁREA DA FOTO
+   FOTO
 =================================================== */
 
 .area-foto {
-
-    position: relative;
-
-    z-index: 2;
 
     display: flex;
 
@@ -386,10 +716,6 @@ body {
 }
 
 
-
-/* ===================================================
-   MOLDURA EXTERNA
-=================================================== */
 
 .moldura-externa {
 
@@ -437,8 +763,6 @@ body {
 
 
 
-/* DETALHE INTERNO DA MOLDURA */
-
 .moldura-externa::before {
 
     content: "";
@@ -463,10 +787,6 @@ body {
 }
 
 
-
-/* ===================================================
-   MOLDURA INTERNA
-=================================================== */
 
 .moldura-interna {
 
@@ -495,10 +815,6 @@ body {
 }
 
 
-
-/* ===================================================
-   FOTO
-=================================================== */
 
 .foto-pai {
 
@@ -534,14 +850,58 @@ body {
 
 
 /* ===================================================
+   EFEITO AO ABRIR
+=================================================== */
+
+.tela-inicial.abrindo
+.moldura-externa {
+
+    animation:
+        brilhoFoto
+        1.3s
+        ease;
+
+}
+
+
+
+@keyframes brilhoFoto {
+
+    0% {
+
+        box-shadow:
+            0 18px 38px rgba(0, 0, 0, 0.48),
+            0 0 25px rgba(205, 145, 61, 0.12);
+
+    }
+
+
+    45% {
+
+        box-shadow:
+            0 18px 38px rgba(0, 0, 0, 0.48),
+            0 0 42px rgba(231, 177, 94, 0.48);
+
+    }
+
+
+    100% {
+
+        box-shadow:
+            0 18px 38px rgba(0, 0, 0, 0.48),
+            0 0 25px rgba(205, 145, 61, 0.12);
+
+    }
+
+}
+
+
+
+/* ===================================================
    MENSAGEM INICIAL
 =================================================== */
 
 .mensagem-inicial {
-
-    position: relative;
-
-    z-index: 2;
 
     max-width: 410px;
 
@@ -575,8 +935,7 @@ body {
             17px
         );
 
-    line-height:
-        1.4;
+    line-height: 1.4;
 
 }
 
@@ -599,14 +958,10 @@ body {
 
 
 /* ===================================================
-   BOTÃO ABRIR HOMENAGEM
+   BOTÃO ABRIR
 =================================================== */
 
 .area-botao {
-
-    position: relative;
-
-    z-index: 2;
 
     display: flex;
 
@@ -724,10 +1079,6 @@ body {
             rgba(72, 43, 22, 0.95)
         );
 
-    box-shadow:
-        0 12px 25px rgba(0, 0, 0, 0.40),
-        0 0 20px rgba(213, 151, 66, 0.12);
-
 }
 
 
@@ -743,8 +1094,6 @@ body {
 
 
 .icone-play {
-
-    font-size: 14px;
 
     color: #dfb66d;
 
@@ -765,8 +1114,6 @@ body {
             12px
         );
 
-    letter-spacing: 0.4px;
-
     color:
         rgba(
             238,
@@ -780,7 +1127,7 @@ body {
 
 
 /* ===================================================
-   CONTEÚDO DA HOMENAGEM
+   HOMENAGEM COMPLETA
 =================================================== */
 
 .conteudo-homenagem {
@@ -809,8 +1156,6 @@ body {
 }
 
 
-
-/* CLASSE ATIVADA PELO JAVASCRIPT */
 
 .conteudo-homenagem.ativo {
 
@@ -886,7 +1231,7 @@ body {
 
 
 /* ===================================================
-   TEXTO DA HOMENAGEM
+   TEXTO
 =================================================== */
 
 .texto-homenagem {
@@ -1043,10 +1388,6 @@ body {
 
     cursor: pointer;
 
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
-
 }
 
 
@@ -1075,7 +1416,7 @@ body {
 
 
 /* ===================================================
-   RODAPÉ DECORATIVO
+   RODAPÉ
 =================================================== */
 
 .decoracao-rodape {
@@ -1099,11 +1440,10 @@ body {
 
 
 /* ===================================================
-   ANIMAÇÕES
+   CORAÇÃO
 =================================================== */
 
 @keyframes pulsarCoracao {
-
 
     0%,
     100% {
@@ -1126,8 +1466,7 @@ body {
 
 
 /* ===================================================
-   CELULARES COM ALTURA MENOR
-   EX.: 600px / 650px
+   CELULARES MAIS BAIXOS
 =================================================== */
 
 @media (
@@ -1245,6 +1584,15 @@ body {
 
     }
 
+
+    .frase-fundo {
+
+        bottom: 78px;
+
+        font-size: 12px;
+
+    }
+
 }
 
 
@@ -1348,6 +1696,13 @@ body {
 
     }
 
+
+    .frase-fundo {
+
+        display: none;
+
+    }
+
 }
 
 
@@ -1438,5 +1793,28 @@ body {
         width: 270px;
 
     }
+
+}
+
+
+
+/* ===================================================
+   ACESSIBILIDADE
+   REDUZ ANIMAÇÕES SE CONFIGURADO NO APARELHO
+=================================================== */
+
+@media (
+    prefers-reduced-motion: reduce
+) {
+
+
+    .particula,
+    .frase-fundo,
+    .coracao {
+
+        animation: none;
+
+    }
+
 
 }
